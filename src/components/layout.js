@@ -4,7 +4,8 @@ import { Link } from "gatsby"
 const Layout = props => {
   return (
     <div>
-      <Navbar light={"dark"}>{props.children}</Navbar>
+      <Navbar light={"dark"} />
+      {props.children}
     </div>
   )
 }

@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "search",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "X5GON search engine powered by ML",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "IJS",
   "dependencies": {
     "@reach/router": "^1.2.1",
     "gatsby": "^2.17.4",

@@ -5,6 +5,8 @@ import ReactPaginate from "react-paginate"
 import { Link } from "gatsby"
 import withLocation from "../components/withLocation"
 
+import Layout from "../components/layout"
+
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -66,6 +68,7 @@ class Search extends React.Component {
       )
         .then(res => res.json())
         .then(json => {
+          console.log(json)
           this.setState({
             isLoaded: true,
             api_search: {
@@ -153,11 +156,8 @@ class Search extends React.Component {
     if (this.state.IsSearching === true)
       return (
         <p className="mt-2">
-          Number of search results found:{" "}
-          {this.state.api_search.metadata.num_or_materials} for{" "}
-          <b>{this.state.api_search.query.text}</b> in{" "}
-          {this.state.api_search.metadata.max_pages} pages | currently on page{" "}
-          {this.state.current_page}
+          Found <b>{this.state.api_search.metadata.count}</b> Open Educational
+          Resources
         </p>
       )
     else {
@@ -192,17 +192,6 @@ class Search extends React.Component {
     return (
       <Link to={"/search?q=" + this.state.search_key}>
         <div className="btn btn-outline-primary px-4">{text.text}</div>
-      </Link>
-    )
-  }
-  LogoIcon = () => {
-    return (
-      <Link to="/">
-        <img
-          src="https://www.x5gon.org/wp-content/themes/x5gon/dist/assets/img/logo.svg"
-          alt="X5GON"
-          className="my-5 img-fluid"
-        />
       </Link>
     )
   }
@@ -254,10 +243,9 @@ class Search extends React.Component {
   // RENDER VIEW
   render() {
     return (
-      <React.Fragment>
+      <Layout>
         <div className="container">
           <div className="text-center" id="search">
-            <this.LogoIcon />
             <this.SearchBar />
             <this.SearchButton text={"Search"} />
             <div />
@@ -268,7 +256,7 @@ class Search extends React.Component {
           <this.SearchItemsUL />
           <this.BottomPagination />
         </div>
-      </React.Fragment>
+      </Layout>
     )
   }
 }
