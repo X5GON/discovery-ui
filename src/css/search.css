@@ -1,0 +1,19 @@
+.recommendations li {
+	background: none;
+	border: none;
+	color: red;
+}
+.searched-items {
+	list-style-type: none;
+	padding: 0;
+}
+.searched {
+	color: #086d7c;
+}
+#spacing-div {
+	padding-bottom: 20%;
+	width: 100%;
+}
+.loading-icon {
+	position: static;
+}

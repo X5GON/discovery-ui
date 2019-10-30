@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@reach/router": "^1.2.1",
     "gatsby": "^2.17.4",
     "gatsby-image": "^2.2.29",
     "gatsby-plugin-manifest": "^2.2.23",
@@ -14,9 +15,11 @@
     "gatsby-source-filesystem": "^2.1.33",
     "gatsby-transformer-sharp": "^2.3.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.8.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-paginate": "^6.3.0"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
