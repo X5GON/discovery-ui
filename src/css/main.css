@@ -48,6 +48,10 @@ p {
   padding-top: 128px;
   padding-bottom: 128px;
 }
+.p-64 {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
 .pb-128 {
   padding-bottom: 128px;
 }
@@ -220,6 +224,9 @@ header .under {
 }
 .bg-pink {
   color: #44004d;
+}
+.bg-gray {
+  background-color: rgb(230, 230, 230);
 }
 .btb-green {
   border-top: #00ad57 1px solid;
@@ -506,6 +513,10 @@ header .under {
   .p-128 {
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+  .p-64 {
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
   .pt-128 {
     padding-top: 64px;

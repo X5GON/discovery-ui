@@ -1,16 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 
-const Layout = props => {
-  return (
-    <div>
-      <Navbar light={"dark"} />
-      {props.children}
-    </div>
-  )
+import logo from "../images/logo/x5gon_logo_light.svg"
+
+export const Layout = props => {
+  return <div>{props.children}</div>
 }
 
-const Navbar = props => {
+export const Navbar = props => {
   const content = [
     {
       li: "Our Repositories",
@@ -35,15 +32,7 @@ const Navbar = props => {
     >
       <div className="navbar-brand">
         <Link to="/" className="nav-link">
-          <img
-            src={
-              "/images/logo/x5gon_logo_" +
-              (props.light ? "light" : "dark") +
-              ".svg"
-            }
-            height="22px"
-            alt="logo"
-          ></img>
+          <img src={logo} height="22px" alt="logo"></img>
         </Link>
       </div>
       <button
@@ -75,5 +64,3 @@ const Navbar = props => {
     </nav>
   )
 }
-
-export default Layout

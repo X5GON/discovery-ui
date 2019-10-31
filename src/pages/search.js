@@ -1,21 +1,21 @@
 import React from "react"
 import "../css/search.css"
 import "../css/bootstrap.css"
+import "../css/main.css"
 import ReactPaginate from "react-paginate"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import withLocation from "../components/withLocation"
 
-import Layout from "../components/layout"
+import { Layout, Navbar } from "../components/layout"
 
 class Search extends React.Component {
   constructor(props) {
     super(props)
     // STATE
 
-    const defaultQuery = props.search.q
-
     this.state = {
-      search_key: String(defaultQuery),
+      defaultSearch: true,
+      search_key: String(props.search.q),
       current_page: 1,
       previous_page: 0,
       previous_search: "",
@@ -31,10 +31,6 @@ class Search extends React.Component {
       site_api: "https://platform.x5gon.org/api/v1/",
       wordlist: [],
     }
-
-    if (defaultQuery) {
-      this.searchComponent()
-    }
   }
   // FUNCTIONS
   /* componentWillMount = () => {
@@ -45,6 +41,12 @@ class Search extends React.Component {
       })
     })
   } */
+  componentDidMount = () => {
+    if (this.state.defaultSearch && this.state.search_key !== "undefined") {
+      this.searchComponent()
+      this.setState({ defaultSearch: false })
+    }
+  }
 
   searchComponent = () => {
     this.setState({
@@ -89,10 +91,10 @@ class Search extends React.Component {
       showRecommendations: true,
     })
   }
-  CheckEnter = ele => {
-    if (ele.key === "Enter") {
-      this.searchComponent()
-    }
+  handleSearch = e => {
+    e.preventDefault()
+    navigate("/search?q=" + this.state.search_key)
+    this.searchComponent()
   }
   AcceptRec = name => {
     this.setState({ search_key: name, showRecommendations: false })
@@ -155,10 +157,10 @@ class Search extends React.Component {
   NrOfSearches = () => {
     if (this.state.IsSearching === true)
       return (
-        <p className="mt-2">
+        <h4 className="p-64">
           Found <b>{this.state.api_search.metadata.count}</b> Open Educational
           Resources
-        </p>
+        </h4>
       )
     else {
       return null
@@ -166,33 +168,28 @@ class Search extends React.Component {
   }
   SearchBar = () => {
     return (
-      <input
-        ref={input => input && input.focus()}
-        type="text"
-        value={this.state.search_key}
-        id={"todoName" + this.props.id}
-        onChange={e => this.ChangeSearchKey(e.target.value)}
-        onKeyDown={this.CheckEnter}
-        placeholder="Search for OER material"
-        className="form-control align-middle mb-3"
-        autoComplete="off"
-      />
+      <div>
+        <form onSubmit={this.handleSearch} className="search-input">
+          <input
+            ref={input => input && input.focus()}
+            type="text"
+            value={this.state.searchKey}
+            onChange={e => this.ChangeSearchKey(e.target.value)}
+            placeholder="Search |"
+            autoComplete="off"
+          />
+          <button type="submit" />
+        </form>
+      </div>
     )
   }
-  SearchButton = text => {
-    /*     return (
-      <button
-        type="button"
-        className="btn btn-outline-primary px-4"
-        onClick={this.searchComponent.bind(this)}
-      >
-        {text.text}
-      </button>
-    ) */
+  SearchDIV = () => {
     return (
-      <Link to={"/search?q=" + this.state.search_key}>
-        <div className="btn btn-outline-primary px-4">{text.text}</div>
-      </Link>
+      <div className="p-64 bg-gray">
+        <div className="maxer-880 mx-auto">
+          <this.SearchBar />
+        </div>
+      </div>
     )
   }
   SearchItem = item => {
@@ -201,15 +198,21 @@ class Search extends React.Component {
       sitem.description = sitem.description.substr(0, 280) + " ..."
     }
     return (
-      <li key={sitem.url}>
-        <div className="jumbotron bg-transparent py-1 my-1">
+      <li key={sitem.url} className="pb-3">
+        <div className="search-li">
           <a href={sitem.url} target="blank">
-            <h4 className="searched">{sitem.title}</h4>
+            <p className="searched p2 maxer-500">{sitem.title}</p>
           </a>
-          <span className="text-muted">
-            <small>{sitem.url}</small>
-          </span>
+
           <p>{sitem.description}</p>
+
+          <a className="text-muted text-underline" href={sitem.url}>
+            <div className="bg-light">{sitem.url}</div>
+          </a>
+          <div className="pt-3 info">
+            <p>Language: {sitem.language}</p>
+            <p>Provider: {sitem.provider}</p>
+          </div>
         </div>
       </li>
     )
@@ -221,22 +224,6 @@ class Search extends React.Component {
       </ul>
     )
   }
-  LoadingIcon = () => {
-    if (this.state.isLoaded === false) {
-      return (
-        <div>
-          <img
-            src="/imgs/loading-icon.gif"
-            alt="loading-animation"
-            height="50px"
-            className="loading-icon"
-          />
-        </div>
-      )
-    } else {
-      return null
-    }
-  }
 
   // OTHER
 
@@ -244,17 +231,15 @@ class Search extends React.Component {
   render() {
     return (
       <Layout>
-        <div className="container">
-          <div className="text-center" id="search">
-            <this.SearchBar />
-            <this.SearchButton text={"Search"} />
-            <div />
-            <this.LoadingIcon />
+        <Navbar light={true} />
+        <this.SearchDIV />
+        <div className="bg-light">
+          <div className="maxer-880 mx-auto" id="search">
+            <this.Recommendations />
+            <this.NrOfSearches />
+            <this.SearchItemsUL />
+            <this.BottomPagination />
           </div>
-          <this.Recommendations />
-          <this.NrOfSearches />
-          <this.SearchItemsUL />
-          <this.BottomPagination />
         </div>
       </Layout>
     )
