@@ -8,6 +8,12 @@ import withLocation from "../components/withLocation"
 
 import { Layout, Navbar } from "../components/layout"
 
+/* 
+this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
+this.state.api_search.metadata.max_pages `je filtrirano`
+
+*/
+
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -48,7 +54,7 @@ class Search extends React.Component {
     }
   }
 
-  searchComponent = () => {
+  searchComponent = currentPage => {
     this.setState({
       previous_search: String(this.state.search_key),
       previous_page: parseInt(this.state.current_page),
@@ -56,7 +62,7 @@ class Search extends React.Component {
     if (
       this.state.search_key &&
       (this.state.search_key !== this.state.previous_search ||
-        this.state.previous_page !== this.state.current_page)
+        this.state.previous_page !== currentPage)
     ) {
       this.setState({
         isLoaded: false,
@@ -66,7 +72,7 @@ class Search extends React.Component {
           "search?text=" +
           this.state.search_key +
           "&page=" +
-          this.state.current_page
+          currentPage
       )
         .then(res => res.json())
         .then(json => {
@@ -82,7 +88,6 @@ class Search extends React.Component {
             IsSearching: true,
           })
         })
-      //console.log(this.state);
     }
   }
   ChangeSearchKey = value => {
@@ -100,28 +105,34 @@ class Search extends React.Component {
     this.setState({ search_key: name, showRecommendations: false })
   }
   ChangePage = data => {
-    this.setState({ current_page: data.selected + 1 })
-    this.searchComponent()
+    this.setState({ current_page: data.selected })
+    console.log(data.selected)
+    this.searchComponent(data.selected + 1)
   }
   /* PLUGIN FROM https://www.npmjs.com/package/react-paginate */
   BottomPagination = () => {
     if (this.state.api_search.metadata.max_pages) {
       return (
-        <ReactPaginate
-          pageCount={this.state.api_search.metadata.max_pages}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={1}
-          onPageChange={this.ChangePage}
-          containerClassName={"pagination justify-content-center"}
-          pageClassName={"page-item"}
-          pageLinkClassName={"page-link"}
-          activeClassName={"page-item active"}
-          previousClassName={"page-item"}
-          previousLinkClassName={"page-link"}
-          nextClassName={"page-item"}
-          nextLinkClassName={"page-link"}
-          disabledClassName={"page-item disabled"}
-        />
+        <div>
+          <p className="text-center">PAGE</p>
+          <ReactPaginate
+            pageCount={this.state.api_search.metadata.max_pages}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={1}
+            onPageChange={this.ChangePage}
+            containerClassName={"pagination justify-content-center"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            activeClassName={"page-item active"}
+            previousLabel={"<"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextLabel={">"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+            disabledClassName={"page-item disabled"}
+          />
+        </div>
       )
     } else {
       return null
@@ -157,9 +168,9 @@ class Search extends React.Component {
   NrOfSearches = () => {
     if (this.state.IsSearching === true)
       return (
-        <h4 className="p-64 ml-3">
-          Found <b>{this.state.api_search.metadata.count}</b> Open Educational
-          Resources
+        <h4 className="p-64 text-center text-md-left ml-md-4">
+          Found <b>{this.state.api_search.metadata.count * 10}</b> Open
+          Educational Resources
         </h4>
       )
     else {
@@ -175,7 +186,7 @@ class Search extends React.Component {
             type="text"
             value={this.state.search_key}
             onChange={e => this.ChangeSearchKey(e.target.value)}
-            placeholder="Search |"
+            placeholder="Search"
             autoComplete="off"
           />
           <button type="submit" />
@@ -206,8 +217,8 @@ class Search extends React.Component {
 
           <p>{sitem.description}</p>
 
-          <a className="text-muted text-underline" href={sitem.url}>
-            <div className="bg-light">{sitem.url}</div>
+          <a className="text-muted" href={sitem.url}>
+            <div className="bg-light p-2">{sitem.url}</div>
           </a>
           <div className="pt-3 info">
             <p>Language: {sitem.language}</p>

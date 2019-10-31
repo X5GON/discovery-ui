@@ -49,6 +49,7 @@
   height: 100%;
   border: none;
   background: url(../images/search.svg) no-repeat center center;
+  background-size: 50% 50%;
 }
 header {
   min-height: 100vh;
