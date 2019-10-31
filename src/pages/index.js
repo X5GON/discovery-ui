@@ -6,28 +6,28 @@ import { navigate } from "gatsby"
 import { Layout, Navbar } from "../components/layout"
 
 const IndexPage = () => {
-  const [searchKey, setSearchKey] = useState()
-
-  const onFormSubmit = e => {
-    e.preventDefault()
-    if (searchKey) {
-      navigate("/search?q=" + searchKey)
-    }
-  }
-
-  const ChangeSearchKey = value => {
-    setSearchKey(value)
-  }
-
   const SearchBar = () => {
+    const [searchKey, setSearchKey] = useState()
+
+    const onFormSubmit = e => {
+      e.preventDefault()
+      if (searchKey) {
+        navigate("/search?q=" + searchKey)
+      }
+    }
+
+    const ChangeSearchKey = e => {
+      e.preventDefault()
+      console.log(e.target.value)
+      setSearchKey(e.target.value)
+    }
     return (
       <div className="pt-128">
         <form onSubmit={onFormSubmit} className="search-input">
           <input
-            ref={input => input && input.focus()}
             type="text"
             value={searchKey}
-            onChange={e => ChangeSearchKey(e.target.value)}
+            onChange={ChangeSearchKey}
             placeholder="Search |"
             autoComplete="off"
           />

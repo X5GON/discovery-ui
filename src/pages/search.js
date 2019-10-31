@@ -157,7 +157,7 @@ class Search extends React.Component {
   NrOfSearches = () => {
     if (this.state.IsSearching === true)
       return (
-        <h4 className="p-64">
+        <h4 className="p-64 ml-3">
           Found <b>{this.state.api_search.metadata.count}</b> Open Educational
           Resources
         </h4>
@@ -173,7 +173,7 @@ class Search extends React.Component {
           <input
             ref={input => input && input.focus()}
             type="text"
-            value={this.state.searchKey}
+            value={this.state.search_key}
             onChange={e => this.ChangeSearchKey(e.target.value)}
             placeholder="Search |"
             autoComplete="off"

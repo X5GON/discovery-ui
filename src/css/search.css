@@ -32,6 +32,7 @@
   width: 30px;
 }
 .search-input {
+  margin: 0 2rem 0 2rem;
   height: 76px;
   background-color: white;
   grid-template-columns: 90% 10%;
@@ -60,4 +61,10 @@ header {
 }
 .info p {
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .search-input {
+    grid-template-columns: 80% 20%;
+  }
 }
