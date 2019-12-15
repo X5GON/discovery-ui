@@ -36,17 +36,10 @@ class Search extends React.Component {
       corsEnabled: false,
       site_api: "https://platform.x5gon.org/api/v1/",
       wordlist: [],
+      loading: true,
     }
   }
-  // FUNCTIONS
-  /* componentWillMount = () => {
-    fetch("/search/recommendation_words.json").then(async resp => {
-      const data = await resp.json()
-      this.setState({
-        wordlist: data.words,
-      })
-    })
-  } */
+
   componentDidMount = () => {
     if (this.state.defaultSearch && this.state.search_key !== "undefined") {
       this.searchComponent()
@@ -86,6 +79,7 @@ class Search extends React.Component {
             },
             showRecommendations: false,
             IsSearching: true,
+            loading: false,
           })
         })
     }
@@ -97,6 +91,9 @@ class Search extends React.Component {
     })
   }
   handleSearch = e => {
+    this.setState({
+      loading: true,
+    })
     e.preventDefault()
     navigate("/search?q=" + this.state.search_key)
     this.searchComponent()
@@ -168,10 +165,12 @@ class Search extends React.Component {
   NrOfSearches = () => {
     if (this.state.IsSearching === true)
       return (
-        <h4 className="p-64 text-center text-md-left ml-md-4">
-          Found <b>{this.state.api_search.metadata.count * 10}</b> Open
-          Educational Resources
-        </h4>
+        <div className="p-64 text-center text-semi-light">
+          <h4>
+            {this.state.api_search.metadata.count * 10} Open Educational
+            Resources Found
+          </h4>
+        </div>
       )
     else {
       return null
@@ -180,7 +179,7 @@ class Search extends React.Component {
   SearchBar = () => {
     return (
       <div>
-        <form onSubmit={this.handleSearch} className="search-input">
+        <form onSubmit={this.handleSearch} className="search-input mx-0">
           <input
             ref={input => input && input.focus()}
             type="text"
@@ -196,7 +195,7 @@ class Search extends React.Component {
   }
   SearchDIV = () => {
     return (
-      <div className="p-64 bg-gray">
+      <div className="p-64">
         <div className="maxer-880 mx-auto">
           <this.SearchBar />
         </div>
@@ -214,15 +213,22 @@ class Search extends React.Component {
           <a href={sitem.url} target="blank">
             <p className="searched p2 maxer-500">{sitem.title}</p>
           </a>
+          <p className="search-description">{sitem.description}</p>
 
-          <p>{sitem.description}</p>
-
-          <a className="text-muted" href={sitem.url}>
-            <div className="bg-light p-2">{sitem.url}</div>
-          </a>
+          <div className="bg-light p-2">
+            Source:{" "}
+            <a className="text-muted" href={sitem.url}>
+              {sitem.url}
+            </a>
+          </div>
           <div className="pt-3 info">
-            <p>Language: {sitem.language}</p>
-            <p>Provider: {sitem.provider}</p>
+            <span>
+              <b>Language:</b> {sitem.language}
+            </span>
+            <span className="text-green mx-3">/</span>
+            <span>
+              <b>Provider:</b> {sitem.provider}
+            </span>
           </div>
         </div>
       </li>
@@ -235,6 +241,11 @@ class Search extends React.Component {
       </ul>
     )
   }
+  LoadingIcon = () => (
+    <div className="d-relative">
+      <div className="loading-icon mx-auto bg-none" />
+    </div>
+  )
 
   // OTHER
 
@@ -244,6 +255,7 @@ class Search extends React.Component {
       <Layout>
         <Navbar light={true} />
         <this.SearchDIV />
+        {this.state.loading ? <this.LoadingIcon /> : null}
         <div className="bg-light">
           <div className="maxer-880 mx-auto" id="search">
             <this.Recommendations />

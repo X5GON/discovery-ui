@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import logo from "../images/logo/x5gon_logo_light.svg"
+import logo_dark from "../images/logo/x5gon_logo_dark.svg"
+import logo_light from "../images/logo/x5gon_logo_light.svg"
 
 export const Layout = props => {
   return <div>{props.children}</div>
@@ -32,7 +33,11 @@ export const Navbar = props => {
     >
       <div className="navbar-brand">
         <Link to="/" className="nav-link">
-          <img src={logo} height="22px" alt="logo"></img>
+          <img
+            src={props.light ? logo_light : logo_dark}
+            height="22px"
+            alt="logo"
+          ></img>
         </Link>
       </div>
       <button

@@ -81,7 +81,7 @@ h1 {
 }
 h2 {
   font-size: 4.75em !important;
-  font-weight: 300;
+  font-weight: 300 !important;
   letter-spacing: -0.2;
   font-size: 76px;
 }
@@ -184,7 +184,9 @@ header .under {
 .pics-resp {
   height: 880px;
 }
-
+.text-semi-light {
+  color: #999fb2 !important;
+}
 .bottomed {
   bottom: 0;
 }
