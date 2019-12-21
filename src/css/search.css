@@ -3,12 +3,18 @@
   border: none;
   color: red;
 }
+.hover-green:hover {
+  color: #00ad57 !important;
+}
 .searched-items {
   list-style-type: none;
   padding: 0;
 }
 .searched {
   color: black;
+}
+.searched span {
+  padding-top: 5px;
 }
 #spacing-div {
   padding-bottom: 20%;
@@ -24,6 +30,29 @@
 }
 nav {
   border-bottom: solid 2px #f3f4f8;
+}
+.search-img {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: black;
+  margin-left: 1rem;
+}
+.search-img.video {
+  background: url(../images/icons/video.svg) #f7f8f9 center no-repeat;
+}
+.search-img.text {
+  background: url(../images/icons/text.svg) #f7f8f9 center no-repeat;
+}
+.search-img.audio {
+  background: url(../images/icons/audio.svg) #f7f8f9 center no-repeat;
+}
+
+.link-img {
+  background: url(../images/icons/link.svg) no-repeat;
+  height: 32px;
+  width: 32px;
 }
 .loading-icon {
   position: static;
@@ -55,7 +84,7 @@ nav {
 .search-input button {
   height: 100%;
   border: none;
-  background: url(../images/search.svg) no-repeat center center;
+  background: url(../images/icons/search.svg) no-repeat center center;
   background-size: 50% 50%;
 }
 header {

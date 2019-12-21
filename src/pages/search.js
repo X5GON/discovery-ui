@@ -8,6 +8,11 @@ import withLocation from "../components/withLocation"
 
 import { Layout, Navbar } from "../components/layout"
 
+import video_img from "../images/icons/video.svg"
+import audio_img from "../images/icons/audio.svg"
+import text_img from "../images/icons/text.svg"
+import link_img from "../images/icons/link.svg"
+
 /* 
 this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
 this.state.api_search.metadata.max_pages `je filtrirano`
@@ -210,24 +215,32 @@ class Search extends React.Component {
     return (
       <li key={sitem.url} className="pb-3">
         <div className="search-li">
-          <a href={sitem.url} target="blank">
-            <p className="searched p2 maxer-500">{sitem.title}</p>
-          </a>
+          <div className="row p-0">
+            <div className={"col-1 search-img " + sitem.type} />
+            <div className="col">
+              <a href={sitem.url} target="blank" className="d-inline-block">
+                <p className="searched p2 maxer-500 pb-0 hover-green">
+                  {sitem.title}
+                  <img src={link_img} height={36} />
+                </p>
+              </a>
+            </div>
+          </div>
           <p className="search-description">{sitem.description}</p>
 
           <div className="bg-light p-2">
             Source:{" "}
-            <a className="text-muted" href={sitem.url}>
+            <a className="text-muted hover-green" href={sitem.url}>
               {sitem.url}
             </a>
           </div>
           <div className="pt-3 info">
             <span>
-              <b>Language:</b> {sitem.language}
+              <b>Provider:</b> {sitem.provider}
             </span>
             <span className="text-green mx-3">/</span>
             <span>
-              <b>Provider:</b> {sitem.provider}
+              <b>Language:</b> {sitem.language}
             </span>
           </div>
         </div>
