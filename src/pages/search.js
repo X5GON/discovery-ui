@@ -8,10 +8,11 @@ import withLocation from "../components/withLocation"
 
 import { Layout, Navbar } from "../components/layout"
 
-import video_img from "../images/icons/video.svg"
-import audio_img from "../images/icons/audio.svg"
-import text_img from "../images/icons/text.svg"
 import link_img from "../images/icons/link.svg"
+import copy from "../images/icons/copy.svg"
+import dve_crte from "../images/icons/dve_crte.svg"
+import no_cash from "../images/icons/no_cash.svg"
+import cc from "../images/icons/cc.svg"
 
 /* 
 this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
@@ -56,6 +57,7 @@ class Search extends React.Component {
     this.setState({
       previous_search: String(this.state.search_key),
       previous_page: parseInt(this.state.current_page),
+      loading: true,
     })
     if (
       this.state.search_key &&
@@ -183,7 +185,7 @@ class Search extends React.Component {
   }
   SearchBar = () => {
     return (
-      <div>
+      <div className="mx-3 mx-xl-0">
         <form onSubmit={this.handleSearch} className="search-input mx-0">
           <input
             ref={input => input && input.focus()}
@@ -207,6 +209,14 @@ class Search extends React.Component {
       </div>
     )
   }
+  TinyIcons = () => (
+    <span className="tiny-icons">
+      <img src={copy} alt="copy" />
+      <img src={dve_crte} alt="dve_crte" />
+      <img src={no_cash} alt="no_cash" />
+      <img src={cc} alt="cc" />
+    </span>
+  )
   SearchItem = item => {
     let sitem = item
     if (sitem.description && sitem.description.length > 280) {
@@ -217,18 +227,21 @@ class Search extends React.Component {
         <div className="search-li">
           <div className="row p-0">
             <div className={"col-1 search-img " + sitem.type} />
-            <div className="col">
+            <div className="col-8">
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <p className="searched p2 maxer-500 pb-0 hover-green">
                   {sitem.title}
-                  <img src={link_img} height={36} />
+                  <img src={link_img} height={36} alt="link" />
                 </p>
               </a>
+            </div>
+            <div className="col">
+              <this.TinyIcons />
             </div>
           </div>
           <p className="search-description">{sitem.description}</p>
 
-          <div className="bg-light p-2">
+          <div className="bg-light search-source">
             Source:{" "}
             <a className="text-muted hover-green" href={sitem.url}>
               {sitem.url}

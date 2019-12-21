@@ -28,8 +28,21 @@
 .full-screen {
   min-height: 100vh;
 }
-nav {
-  border-bottom: solid 2px #f3f4f8;
+nav.navbar-light {
+  box-shadow: 0 2px 8px 0 rgba(0, 19, 77, 0.16);
+}
+nav.navbar-dark {
+  box-shadow: 0 2px 8px 0 rgba(0, 19, 77, 0.16);
+}
+.search-source {
+  padding: 8px;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.26px;
+  color: #4a5472;
+}
+.search-source a {
+  text-decoration: underline;
 }
 .search-img {
   width: 48px;
@@ -48,7 +61,9 @@ nav {
 .search-img.audio {
   background: url(../images/icons/audio.svg) #f7f8f9 center no-repeat;
 }
-
+.tiny-icons img {
+  margin-left: 10px;
+}
 .link-img {
   background: url(../images/icons/link.svg) no-repeat;
   height: 32px;

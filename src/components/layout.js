@@ -11,8 +11,8 @@ export const Layout = props => {
 export const Navbar = props => {
   const content = [
     {
-      li: "Our Repositories",
-      link: "/",
+      li: "Our Databases",
+      link: "/databases",
     },
     {
       li: "About",
