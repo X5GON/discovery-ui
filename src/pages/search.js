@@ -231,7 +231,12 @@ class Search extends React.Component {
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <p className="searched p2 maxer-500 pb-0 hover-green">
                   {sitem.title}
-                  <img src={link_img} height={36} alt="link" />
+                  <img
+                    src={link_img}
+                    style={{ verticalAlign: "-32%" }}
+                    height={36}
+                    alt="link"
+                  />
                 </p>
               </a>
             </div>

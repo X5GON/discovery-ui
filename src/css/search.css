@@ -3,8 +3,17 @@
   border: none;
   color: red;
 }
+.text-black {
+  color: #000d32;
+}
 .hover-green:hover {
   color: #00ad57 !important;
+}
+.bg-light-gray {
+  background-color: #f7f8f9 !important;
+}
+.text-light-dark {
+  color: #4a5472 !important;
 }
 .searched-items {
   list-style-type: none;
