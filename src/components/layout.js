@@ -4,9 +4,11 @@ import { Link } from "gatsby"
 import logo_dark from "../images/logo/x5gon_logo_dark.svg"
 import logo_light from "../images/logo/x5gon_logo_light.svg"
 
+import "../css/search.css"
+
 export const Layout = props => {
   return (
-    <div>
+    <div className={props.theme}>
       {props.children}
       {/* <Footer /> */}
     </div>
@@ -33,17 +35,27 @@ export const Navbar = props => {
     <nav
       className={
         "navbar pt-3 px-md-4 navbar-expand-sm navbar-" +
-        (props.light ? "light" : "dark")
+        (props.light ? "light" : "dark bg-sky")
       }
     >
       <div className="navbar-brand">
-        <Link to="/" className="nav-link">
-          <img
-            src={props.light ? logo_light : logo_dark}
-            height="22px"
-            alt="logo"
-          ></img>
-        </Link>
+        {props.light ? (
+          <Link to="/" className="nav-link">
+            <img
+              src={props.light ? logo_light : logo_dark}
+              height="22px"
+              alt="logo"
+            ></img>
+          </Link>
+        ) : (
+          <a href="https://platform.x5gon.org" className="nav-link">
+            <img
+              src={props.light ? logo_light : logo_dark}
+              height="22px"
+              alt="logo"
+            ></img>
+          </a>
+        )}
       </div>
       <button
         className="navbar-toggler"

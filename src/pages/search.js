@@ -202,7 +202,7 @@ class Search extends React.Component {
   }
   SearchDIV = () => {
     return (
-      <div className="p-64">
+      <div className="py-4 my-2 ds-default">
         <div className="maxer-880 mx-auto">
           <this.SearchBar />
         </div>
@@ -283,11 +283,11 @@ class Search extends React.Component {
   // RENDER VIEW
   render() {
     return (
-      <Layout>
+      <Layout theme="bg-light">
         <Navbar light={true} />
         <this.SearchDIV />
         {this.state.loading ? <this.LoadingIcon /> : null}
-        <div className="bg-light">
+        <div>
           <div className="maxer-880 mx-auto" id="search">
             <this.Recommendations />
             <this.NrOfSearches />

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "../css/main.css"
 import "../css/bootstrap.css"
+import "../css/search.css"
 import { navigate } from "gatsby"
 
 import { Layout, Navbar } from "../components/layout"
@@ -29,6 +30,7 @@ const IndexPage = () => {
         <form onSubmit={onFormSubmit} className="search-input">
           <input
             type="text"
+            className="search"
             value={searchKey}
             onChange={ChangeSearchKey}
             placeholder="Search for OER Material"
@@ -42,10 +44,10 @@ const IndexPage = () => {
 
   const Header = () => {
     return (
-      <header>
+      <header className="mb-0">
         <Navbar light={false} />
         <div className="text-center maxer-880 mx-auto pt-128 text-white">
-          <h2>X5GON Discovery</h2>
+          <h2 className="mt-lg-5 mt-0 mb-lg-3 ">X5GON Discovery</h2>
           <h4>Search and find materials from all over the world</h4>
           <SearchBar />
           <Recommendations />
@@ -66,12 +68,12 @@ const IndexPage = () => {
         <h6>
           <b>Suggested queries:</b>
           {reccs.map((word, index) => (
-            <>
+            <span key={word + index}>
               <span className="simulated-link" onClick={() => goTo(word)}>
-                <span className="mx-3">{word}</span>
+                <span className="mx-3 suggested">{word}</span>
               </span>
               {index !== reccs.length - 1 ? <b>/</b> : null}
-            </>
+            </span>
           ))}
         </h6>
       </div>
