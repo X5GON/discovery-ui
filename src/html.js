@@ -13,7 +13,7 @@ export default function HTML(props) {
         />
 
         <link
-          href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:200,300,400,700&display=swap"
+          href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:200,300,400,600,700&display=swap"
           rel="stylesheet"
         />
 

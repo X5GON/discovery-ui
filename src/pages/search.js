@@ -118,22 +118,25 @@ class Search extends React.Component {
     if (this.state.api_search.metadata.max_pages) {
       return (
         <div>
-          <p className="text-center">PAGE</p>
+          <p className="text-center text-ecosystem text-light-grey">PAGE</p>
           <ReactPaginate
             pageCount={this.state.api_search.metadata.max_pages}
-            pageRangeDisplayed={5}
+            pageRangeDisplayed={0}
             marginPagesDisplayed={1}
             onPageChange={this.ChangePage}
             containerClassName={"pagination justify-content-center"}
-            pageClassName={"page-item"}
-            pageLinkClassName={"page-link"}
-            activeClassName={"page-item active"}
-            previousLabel={"<"}
-            previousClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextLabel={">"}
-            nextClassName={"page-item"}
-            nextLinkClassName={"page-link"}
+            pageClassName={"pagi-item"}
+            pageLinkClassName={"pagi-item-link"}
+            activeClassName={"pagi-item-link active"}
+            breakLabel={"..."}
+            breakClassName={"pagi-item"}
+            breakLinkClassName={"pagi-item-break"}
+            previousLabel={""}
+            previousClassName={"pagi-previous"}
+            previousLinkClassName={"pagi-previous-link"}
+            nextLabel={""}
+            nextClassName={"pagi-next"}
+            nextLinkClassName={"pagi-next-link"}
             disabledClassName={"page-item disabled"}
           />
         </div>
@@ -224,29 +227,31 @@ class Search extends React.Component {
     }
     return (
       <li key={sitem.url} className="pb-3">
-        <div className="search-li">
-          <div className="row p-0">
+        <div className="search-li px-5">
+          <div className="row p-0 mb-0">
             <div className="col-1">
               <div className={"search-img " + sitem.type} />
             </div>
             <div className="col-8">
               <a href={sitem.url} target="blank" className="d-inline-block">
-                <p className="searched p2 maxer-500 pb-0 hover-green">
+                <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
                   <img
                     src={link_img}
-                    style={{ verticalAlign: "-32%" }}
+                    style={{ verticalAlign: "-64%" }}
                     height={36}
                     alt="link"
                   />
-                </p>
+                </h6>
               </a>
             </div>
             <div className="col">
               <this.TinyIcons />
             </div>
           </div>
-          <p className="search-description">{sitem.description}</p>
+          {sitem.description ? (
+            <p className="search-description">{sitem.description}</p>
+          ) : null}
 
           <div className="bg-light search-source">
             Source:{" "}
@@ -269,7 +274,7 @@ class Search extends React.Component {
   }
   SearchItemsUL = item => {
     return (
-      <ul className="searched-items">
+      <ul className="searched-items mx-auto">
         {this.state.api_search.rec_materials.map(item => this.SearchItem(item))}
       </ul>
     )
@@ -289,7 +294,7 @@ class Search extends React.Component {
         <Navbar light={true} />
         <this.SearchDIV />
         {this.state.loading ? <this.LoadingIcon /> : null}
-        <div>
+        <div className="pb-5">
           <div className="maxer-880 mx-auto" id="search">
             <this.Recommendations />
             <this.NrOfSearches />

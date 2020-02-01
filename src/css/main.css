@@ -106,6 +106,14 @@ h5 {
   letter-spacing: 0;
   font-weight: 600;
 }
+h6 {
+  font-size: 20px;
+  font-weight: 600 !important;
+  line-height: 1.6;
+  letter-spacing: normal;
+  margin-top: 0.25rem !important;
+  margin-bottom: 1rem !important;
+}
 .body-2 {
   font-weight: 200;
   font-size: 20px;
@@ -242,6 +250,9 @@ header .under {
 }
 .text-purple {
   color: #00134d;
+}
+.text-light-grey {
+  color: #bec1ce !important;
 }
 .text-purple-bold {
   color: #00134d;
