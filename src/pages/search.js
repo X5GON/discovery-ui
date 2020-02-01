@@ -205,8 +205,8 @@ class Search extends React.Component {
   }
   SearchDIV = () => {
     return (
-      <div className="py-4 my-2 ds-default">
-        <div className="maxer-880 mx-auto">
+      <div className="py-4 my-lg-2 ds-default">
+        <div className="maxer-880 mx-auto px-4 px-lg-0">
           <this.SearchBar />
         </div>
       </div>
@@ -225,27 +225,30 @@ class Search extends React.Component {
     if (sitem.description && sitem.description.length > 280) {
       sitem.description = sitem.description.substr(0, 280) + " ..."
     }
+    const formurl = sitem.url.substr(0, 33) + " ..."
     return (
-      <li key={sitem.url} className="pb-3">
-        <div className="search-li px-5">
+      <li key={sitem.url} className="pb-3 mx-3 mx-lg-0">
+        <div className="search-li px-lg-5 px-4">
           <div className="row p-0 mb-0">
-            <div className="col-1">
-              <div className={"search-img " + sitem.type} />
+            <div className="col-md-1 col-12 pb-3">
+              <div className={"ml-md-3 ml-lg-0 search-img " + sitem.type}>
+                <span
+                  className="d-md-none d-inline text-ecosystem text-light-grey pt-auto pl-5 ml-4"
+                  style={{ verticalAlign: "-50%" }}
+                >
+                  {sitem.type.toUpperCase()}
+                </span>
+              </div>
             </div>
-            <div className="col-8">
+            <div className="col-md-8 col-12 pl-md-5 pl-md-3">
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
-                  <img
-                    src={link_img}
-                    style={{ verticalAlign: "-64%" }}
-                    height={36}
-                    alt="link"
-                  />
+                  <img src={link_img} height={36} alt="link" />
                 </h6>
               </a>
             </div>
-            <div className="col">
+            <div className="col pl-0 d-none d-md-block pl-4 mt-2">
               <this.TinyIcons />
             </div>
           </div>
@@ -256,17 +259,21 @@ class Search extends React.Component {
           <div className="bg-light search-source">
             Source:{" "}
             <a className="text-muted hover-green" href={sitem.url}>
-              {sitem.url}
+              <span className="d-md-block d-none">{sitem.url}</span>
+              <span className="d-md-none">{formurl}</span>
             </a>
           </div>
           <div className="pt-3 info">
-            <span>
+            <span className="d-block d-md-inline mb-2 mb-md-0">
               <b>Provider:</b> {sitem.provider}
             </span>
-            <span className="text-green mx-3">/</span>
-            <span>
+            <span className="text-green mx-3 d-none d-md-inline">/</span>
+            <span className="d-block d-md-inline">
               <b>Language:</b> {sitem.language}
             </span>
+          </div>
+          <div className="col d-block d-md-none pt-4">
+            <this.TinyIcons />
           </div>
         </div>
       </li>

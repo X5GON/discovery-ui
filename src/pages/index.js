@@ -26,8 +26,8 @@ const IndexPage = () => {
       setSearchKey(e.target.value)
     }
     return (
-      <div className="pt-5">
-        <form onSubmit={onFormSubmit} className="search-input">
+      <div className="pt-3 pt-lg-5">
+        <form onSubmit={onFormSubmit} className="search-input-home">
           <input
             type="text"
             className="search"
@@ -47,8 +47,12 @@ const IndexPage = () => {
       <header className="mb-0">
         <Navbar light={false} />
         <div className="text-center maxer-880 mx-auto pt-128 text-white">
-          <h2 className="mt-lg-5 mt-0 mb-lg-3 ">X5GON Discovery</h2>
-          <h4>Search and find materials from all over the world</h4>
+          <h2 className="mt-lg-5 mt-0 mb-lg-3 mb-0 pb-3 pb-lg-3 pt-4 pt-lg-0">
+            X5GON Discovery
+          </h2>
+          <h4 className="mx-4">
+            Search and find materials from all over the world
+          </h4>
           <SearchBar />
           <Recommendations />
         </div>
@@ -64,7 +68,7 @@ const IndexPage = () => {
       "Climate Change",
     ]
     return (
-      <div className="pt-4">
+      <div className="pt-4 mt-5 mt-lg-0 mx-4">
         <h6>
           <b>Suggested queries:</b>
           {reccs.map((word, index) => (

@@ -80,7 +80,6 @@ h1 {
   font-size: 96px;
 }
 h2 {
-  height: 92px;
   font-size: 4.75em !important;
   font-weight: 300 !important;
   line-height: 1.21;
@@ -109,7 +108,7 @@ h5 {
 h6 {
   font-size: 20px;
   font-weight: 600 !important;
-  line-height: 1.6;
+  line-height: 1.9 !important;
   letter-spacing: normal;
   margin-top: 0.25rem !important;
   margin-bottom: 1rem !important;
