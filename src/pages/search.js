@@ -59,6 +59,7 @@ class Search extends React.Component {
       previous_page: parseInt(this.state.current_page),
       loading: true,
     })
+    window.scrollTo(0, 0)
     if (
       this.state.search_key &&
       (this.state.search_key !== this.state.previous_search ||
@@ -103,6 +104,7 @@ class Search extends React.Component {
     })
     e.preventDefault()
     navigate("/search?q=" + this.state.search_key)
+
     this.searchComponent()
   }
   AcceptRec = name => {
@@ -191,7 +193,7 @@ class Search extends React.Component {
       <div className="mx-3 mx-xl-0">
         <form onSubmit={this.handleSearch} className="search-input mx-0">
           <input
-            ref={input => input && input.focus()}
+            /* ref={input => input && input.focus()} */
             type="text"
             value={this.state.search_key}
             onChange={e => this.ChangeSearchKey(e.target.value)}
@@ -259,7 +261,7 @@ class Search extends React.Component {
           <div className="bg-light search-source">
             Source:{" "}
             <a className="text-muted hover-green" href={sitem.url}>
-              <span className="d-md-block d-none">{sitem.url}</span>
+              <span className="d-md-inline d-none">{sitem.url}</span>
               <span className="d-md-none">{formurl}</span>
             </a>
           </div>
