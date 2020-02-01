@@ -14,7 +14,7 @@ import dve_crte from "../images/icons/dve_crte.svg"
 import no_cash from "../images/icons/no_cash.svg"
 import cc from "../images/icons/cc.svg"
 
-/* 
+/*
 this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
 this.state.api_search.metadata.max_pages `je filtrirano`
 
@@ -226,7 +226,9 @@ class Search extends React.Component {
       <li key={sitem.url} className="pb-3">
         <div className="search-li">
           <div className="row p-0">
-            <div className={"col-1 search-img " + sitem.type} />
+            <div className="col-1">
+              <div className={"search-img " + sitem.type} />
+            </div>
             <div className="col-8">
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <p className="searched p2 maxer-500 pb-0 hover-green">
