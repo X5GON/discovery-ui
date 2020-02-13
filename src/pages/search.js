@@ -60,11 +60,8 @@ class Search extends React.Component {
       loading: true,
     })
     window.scrollTo(0, 0)
-    if (
-      this.state.search_key &&
-      (this.state.search_key !== this.state.previous_search ||
-        this.state.previous_page !== currentPage)
-    ) {
+    // removed (this.state.search_key !== this.state.previous_search || this.state.previous_page !== currentPage) because of bugs
+    if (this.state.search_key) {
       this.setState({
         isLoaded: false,
       })
@@ -104,7 +101,6 @@ class Search extends React.Component {
     })
     e.preventDefault()
     navigate("/search?q=" + this.state.search_key)
-
     this.searchComponent()
   }
   AcceptRec = name => {
@@ -214,11 +210,11 @@ class Search extends React.Component {
       </div>
     )
   }
-  TinyIcons = (lic_types) => (
+  TinyIcons = lic_types => (
     <span className="tiny-icons">
-      {lic_types.includes("sa") ? (<img src={copy} alt="copy" />) : null}
-      {lic_types.includes("nd") ? (<img src={dve_crte} alt="dve_crte" />) : null}
-      {lic_types.includes("nc") ? (<img src={no_cash} alt="no_cash" />) : null}
+      {lic_types.includes("sa") ? <img src={copy} alt="copy" /> : null}
+      {lic_types.includes("nd") ? <img src={dve_crte} alt="dve_crte" /> : null}
+      {lic_types.includes("nc") ? <img src={no_cash} alt="no_cash" /> : null}
       <img src={cc} alt="cc" />
     </span>
   )
@@ -251,7 +247,9 @@ class Search extends React.Component {
               </a>
             </div>
             <div className="col pl-0 d-none d-md-block pl-4 mt-2">
-              {sitem.license.typed_name ? (this.TinyIcons(sitem.license.typed_name)) : null}
+              {sitem.license.typed_name
+                ? this.TinyIcons(sitem.license.typed_name)
+                : null}
             </div>
           </div>
           {sitem.description ? (
@@ -275,7 +273,9 @@ class Search extends React.Component {
             </span>
           </div>
           <div className="col d-block d-md-none pt-4">
-            {sitem.license.typed_name ? (this.TinyIcons(sitem.license.typed_name)) : null}
+            {sitem.license.typed_name
+              ? this.TinyIcons(sitem.license.typed_name)
+              : null}
           </div>
         </div>
       </li>
