@@ -16,7 +16,7 @@ import cc from "../images/icons/cc.svg"
 
 /*
 this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
-this.state.api_search.metadata.max_pages `je filtrirano`
+this.state.api_search.metadata.total_pages `je filtrirano`
 
 */
 
@@ -34,7 +34,7 @@ class Search extends React.Component {
       api_search: {
         query: {},
         rec_materials: [],
-        metadata: { max_pages: 0 },
+        metadata: { total_pages: 0 },
       },
       isLoaded: true,
       showRecommendations: false,
@@ -117,12 +117,12 @@ class Search extends React.Component {
   }
   /* PLUGIN FROM https://www.npmjs.com/package/react-paginate */
   BottomPagination = () => {
-    if (this.state.api_search.metadata.max_pages) {
+    if (this.state.api_search.metadata.total_pages) {
       return (
         <div>
           <p className="text-center text-ecosystem text-light-grey">PAGE</p>
           <ReactPaginate
-            pageCount={this.state.api_search.metadata.max_pages}
+            pageCount={this.state.api_search.metadata.total_pages}
             pageRangeDisplayed={0}
             marginPagesDisplayed={1}
             onPageChange={this.ChangePage}
@@ -179,7 +179,7 @@ class Search extends React.Component {
       return (
         <div className="p-64 text-center text-semi-light">
           <h4>
-            {this.state.api_search.metadata.count * 10} Open Educational
+            {this.state.api_search.metadata.total_hits} Open Educational
             Resources Found
           </h4>
         </div>
@@ -214,11 +214,11 @@ class Search extends React.Component {
       </div>
     )
   }
-  TinyIcons = () => (
+  TinyIcons = (lic_types) => (
     <span className="tiny-icons">
-      <img src={copy} alt="copy" />
-      <img src={dve_crte} alt="dve_crte" />
-      <img src={no_cash} alt="no_cash" />
+      {lic_types.includes("sa") ? (<img src={copy} alt="copy" />) : null}
+      {lic_types.includes("nd") ? (<img src={dve_crte} alt="dve_crte" />) : null}
+      {lic_types.includes("nc") ? (<img src={no_cash} alt="no_cash" />) : null}
       <img src={cc} alt="cc" />
     </span>
   )
@@ -251,7 +251,7 @@ class Search extends React.Component {
               </a>
             </div>
             <div className="col pl-0 d-none d-md-block pl-4 mt-2">
-              <this.TinyIcons />
+              {sitem.license.typed_name ? (this.TinyIcons(sitem.license.typed_name)) : null}
             </div>
           </div>
           {sitem.description ? (
@@ -267,7 +267,7 @@ class Search extends React.Component {
           </div>
           <div className="pt-3 info">
             <span className="d-block d-md-inline mb-2 mb-md-0">
-              <b>Provider:</b> {sitem.provider}
+              <b>Provider:</b> {sitem.provider.name}
             </span>
             <span className="text-green mx-3 d-none d-md-inline">/</span>
             <span className="d-block d-md-inline">
@@ -275,7 +275,7 @@ class Search extends React.Component {
             </span>
           </div>
           <div className="col d-block d-md-none pt-4">
-            <this.TinyIcons />
+            {sitem.license.typed_name ? (this.TinyIcons(sitem.license.typed_name)) : null}
           </div>
         </div>
       </li>
