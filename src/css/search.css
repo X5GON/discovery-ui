@@ -12,6 +12,62 @@ input.search {
   color: #bec1ce;
 }
 
+/* filter tab */
+
+.filter {
+  height: 100%;
+}
+.filter .type-li {
+  width: 200px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #f7f8f9;
+  background: url(../images/icons/down.svg) no-repeat center;
+  background-position-x: 172px;
+  background-size: 16px 16px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.43;
+  text-align: left;
+  letter-spacing: 0.3px;
+  color: #4a5472;
+  padding: 10px 16px 10px 16px;
+}
+.filter.show .type-li {
+  background-color: none;
+  border-radius: 0;
+}
+.filter.show {
+  width: 200px;
+  box-shadow: 0 3px 8px 0 rgba(0, 19, 77, 0.15);
+  background-color: #ffffff;
+}
+.filter .dropdown-menu {
+  width: 200px;
+  border: none;
+  margin: 0;
+  padding: 8px;
+  box-shadow: 0 3px 8px 0 rgba(0, 19, 77, 0.15);
+  border-radius: 0;
+}
+
+.filter .dropdown-menu button {
+  height: 32px;
+  padding: 0 8px 0 8px;
+  object-fit: contain;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.43;
+  letter-spacing: 0.3px;
+  color: #bec1ce;
+}
+.filter .dropdown-menu button.active {
+  background-color: #00ad57;
+  color: #ffffff;
+}
+
 /* pagination */
 
 .pagi-item,

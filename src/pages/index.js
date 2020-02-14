@@ -67,6 +67,7 @@ const IndexPage = () => {
       "Support Vector Machine",
       "Climate Change",
     ]
+    /*eslint-disable */
     return (
       <div className="pt-4 mt-5 mt-lg-0 mx-4">
         <h6>
@@ -82,6 +83,7 @@ const IndexPage = () => {
         </h6>
       </div>
     )
+    /*eslint-enable */
   }
 
   return (

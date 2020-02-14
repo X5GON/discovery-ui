@@ -14,6 +14,9 @@ import dve_crte from "../images/icons/dve_crte.svg"
 import no_cash from "../images/icons/no_cash.svg"
 import cc from "../images/icons/cc.svg"
 
+import { isoFormatDMY, parseISOString } from "../components/functions"
+import ISO6391 from "iso-639-1"
+
 /*
 this.state.api_search.metadata.count `je za celotno stevilo nefiltrirano oer elementov`
 this.state.api_search.metadata.total_pages `je filtrirano`
@@ -28,6 +31,7 @@ class Search extends React.Component {
     this.state = {
       defaultSearch: true,
       search_key: String(props.search.q),
+      type: "all",
       current_page: 1,
       previous_page: 0,
       previous_search: "",
@@ -70,7 +74,13 @@ class Search extends React.Component {
           "search?text=" +
           this.state.search_key +
           "&page=" +
-          currentPage
+          currentPage +
+          "&types=" +
+          this.state.type +
+          "&licenses=" +
+          "&languages=" +
+          "&provider_ids=" +
+          "&limit="
       )
         .then(res => res.json())
         .then(json => {
@@ -184,6 +194,53 @@ class Search extends React.Component {
       return null
     }
   }
+  FilterTab = () => {
+    const Type = () => {
+      const types = ["Video", "Audio", "Text"]
+      const ChangeType = type => {
+        if (this.state.type === type) {
+          type = "all"
+        }
+        this.setState(
+          {
+            type: type,
+          },
+          () => this.searchComponent()
+        )
+      }
+      return (
+        <div>
+          <div className="filter mt-3">
+            <button
+              className="type-li"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Type
+            </button>
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {types.map(type => (
+                <button
+                  key={type}
+                  className={
+                    "dropdown-item" +
+                    (this.state.type === type ? " active" : "")
+                  }
+                  onClick={() => ChangeType(type)}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )
+    }
+    return <Type />
+  }
   SearchBar = () => {
     return (
       <div className="mx-3 mx-xl-0">
@@ -198,6 +255,7 @@ class Search extends React.Component {
           />
           <button type="submit" />
         </form>
+        <this.FilterTab />
       </div>
     )
   }
@@ -223,7 +281,9 @@ class Search extends React.Component {
     if (sitem.description && sitem.description.length > 280) {
       sitem.description = sitem.description.substr(0, 280) + " ..."
     }
-    const formurl = sitem.url.substr(0, 33) + " ..."
+    const formurl_lg =
+      sitem.website.substr(0, 95) + (sitem.website.length > 95 ? "..." : "")
+    const formurl = sitem.website.substr(0, 33) + " ..."
     return (
       <li key={sitem.url} className="pb-3 mx-3 mx-lg-0">
         <div className="search-li px-lg-5 px-4">
@@ -258,18 +318,23 @@ class Search extends React.Component {
 
           <div className="bg-light search-source">
             Source:{" "}
-            <a className="text-muted hover-green" href={sitem.url}>
-              <span className="d-md-inline d-none">{sitem.url}</span>
+            <a className="text-muted hover-green" href={sitem.website}>
+              <span className="d-md-inline d-none">{formurl_lg}</span>
               <span className="d-md-none">{formurl}</span>
             </a>
           </div>
           <div className="pt-3 info">
-            <span className="d-block d-md-inline mb-2 mb-md-0">
+            <span className="d-block d-md-inline mb-1 mb-md-0">
               <b>Provider:</b> {sitem.provider.name}
             </span>
             <span className="text-green mx-3 d-none d-md-inline">/</span>
+            <span className="d-block d-md-inline mb-1">
+              <b>Language:</b> {ISO6391.getName(sitem.language)}
+            </span>
+            <span className="text-green mx-3 d-none d-md-inline">/</span>
             <span className="d-block d-md-inline">
-              <b>Language:</b> {sitem.language}
+              <b>Updated:</b>{" "}
+              {isoFormatDMY(parseISOString(sitem.retrieved_date))}
             </span>
           </div>
           <div className="col d-block d-md-none pt-4">
