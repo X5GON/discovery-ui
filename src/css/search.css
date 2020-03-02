@@ -2,6 +2,7 @@
   background: none;
   border: none;
   color: red;
+  display: none;
 }
 input.search {
   font-family: "Open Sans";
@@ -16,6 +17,7 @@ input.search {
 
 .filter {
   height: 100%;
+  width: 200px;
 }
 .filter .type-li {
   width: 200px;
@@ -32,14 +34,17 @@ input.search {
   text-align: left;
   letter-spacing: 0.3px;
   color: #4a5472;
+  background-color: #f7f8f9;
   padding: 10px 16px 10px 16px;
 }
+.filter .type-li:hover {
+  cursor: pointer;
+}
 .filter.show .type-li {
-  background-color: none;
+  background-color: transparent;
   border-radius: 0;
 }
 .filter.show {
-  width: 200px;
   box-shadow: 0 3px 8px 0 rgba(0, 19, 77, 0.15);
   background-color: #ffffff;
 }
@@ -68,6 +73,19 @@ input.search {
   color: #ffffff;
 }
 
+.license-nr {
+  padding: 4px 6px 4px 8px;
+  border-radius: 14px;
+  background-color: #00ad57;
+  color: white;
+  margin-left: 8px;
+}
+.license-nr img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-bottom: 2px;
+}
 /* pagination */
 
 .pagi-item,

@@ -13,6 +13,7 @@ import copy from "../images/icons/copy.svg"
 import dve_crte from "../images/icons/dve_crte.svg"
 import no_cash from "../images/icons/no_cash.svg"
 import cc from "../images/icons/cc.svg"
+import close from "../images/icons/close.svg"
 
 import { isoFormatDMY, parseISOString } from "../components/functions"
 import ISO6391 from "iso-639-1"
@@ -32,6 +33,8 @@ class Search extends React.Component {
       defaultSearch: true,
       search_key: String(props.search.q),
       type: "all",
+      licenses: [],
+      languages: [],
       current_page: 1,
       previous_page: 0,
       previous_search: "",
@@ -69,6 +72,7 @@ class Search extends React.Component {
       this.setState({
         isLoaded: false,
       })
+
       fetch(
         this.state.site_api +
           "search?text=" +
@@ -78,7 +82,9 @@ class Search extends React.Component {
           "&types=" +
           this.state.type +
           "&licenses=" +
+          this.state.licenses.toString() +
           "&languages=" +
+          this.state.languages.toString() +
           "&provider_ids=" +
           "&limit="
       )
@@ -194,6 +200,65 @@ class Search extends React.Component {
       return null
     }
   }
+
+  FilterMultiComponent = propz => {
+    const props = propz.props
+    const Text = props.text
+    const statename = props.statename
+    const types = props.types
+    const ModifyItem = item => {
+      if (this.state[statename].includes(item)) {
+        this.setState(
+          {
+            [statename]: this.state[statename].filter(sin => sin !== item),
+          },
+          () => this.searchComponent()
+        )
+      } else {
+        this.setState(
+          {
+            [statename]: [...this.state[statename], item],
+          },
+          () => this.searchComponent()
+        )
+      }
+    }
+    return (
+      <div className="col-6 col-md-4">
+        <div className="filter mt-3 mx-auto">
+          <div
+            className="type-li"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {Text}
+            {this.state[statename].length !== 0 ? (
+              <span className="license-nr">
+                {this.state[statename].length}
+                <img src={close} alt="x" />
+              </span>
+            ) : null}
+          </div>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {types.map((item, index) => (
+              <button
+                key={item}
+                className={
+                  "dropdown-item" +
+                  (this.state[statename].includes(item) ? " active" : "")
+                }
+                onClick={() => ModifyItem(item)}
+              >
+                {props.displayTypes ? props.displayTypes[index] : item}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
   FilterTab = () => {
     const Type = () => {
       const types = ["Video", "Audio", "Text"]
@@ -209,18 +274,17 @@ class Search extends React.Component {
         )
       }
       return (
-        <div>
-          <div className="filter mt-3">
-            <button
+        <div className="col-6 col-md-4">
+          <div className="filter mt-3 mx-auto">
+            <div
               className="type-li"
-              type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
               Type
-            </button>
+            </div>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {types.map(type => (
                 <button
@@ -239,7 +303,41 @@ class Search extends React.Component {
         </div>
       )
     }
-    return <Type />
+    const licenses = {
+      text: "Licenses",
+      statename: "licenses",
+      types: ["CC", "BY", "BY-NC", "BY-SA", "BY-ND", "BY-NC-ND", "BY-NC-SA"],
+      displayTypes: [
+        "CC",
+        "CC BY",
+        "CC BY-NC",
+        "CC BY-SA",
+        "CC BY-ND",
+        "CC BY-NC-ND",
+        "CC BY-NC-SA",
+      ],
+    }
+    const languages = {
+      text: "Languages",
+      statename: "languages",
+      types: ["en", "es", "sl", "pt", "de", "fr", "ca"],
+      displayTypes: [
+        "English",
+        "Spanish",
+        "Slovene",
+        "Portugese",
+        "German",
+        "French",
+        "Catalan",
+      ],
+    }
+    return (
+      <div className="row">
+        <Type />
+        <this.FilterMultiComponent props={licenses} />
+        <this.FilterMultiComponent props={languages} />
+      </div>
+    )
   }
   SearchBar = () => {
     return (
