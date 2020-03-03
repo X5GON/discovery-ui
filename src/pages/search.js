@@ -50,6 +50,7 @@ class Search extends React.Component {
       site_api: "https://platform.x5gon.org/api/v1/",
       wordlist: [],
       loading: true,
+      showFilter: true,
     }
   }
 
@@ -224,8 +225,8 @@ class Search extends React.Component {
       }
     }
     return (
-      <div className="col-6 col-md-4">
-        <div className="filter mt-3 mx-auto">
+      <div className="col-sm-6 col-12 col-md-4">
+        <div className={"filter mt-3 " + (props.style ? props.style : "")}>
           <div
             className="type-li"
             id="dropdownMenuButton"
@@ -274,8 +275,8 @@ class Search extends React.Component {
         )
       }
       return (
-        <div className="col-6 col-md-4">
-          <div className="filter mt-3 mx-auto">
+        <div className="col-sm-6 col-12 col-md-4">
+          <div className="filter mt-3">
             <div
               className="type-li"
               id="dropdownMenuButton"
@@ -330,6 +331,7 @@ class Search extends React.Component {
         "French",
         "Catalan",
       ],
+      style: "ml-md-auto",
     }
     return (
       <div className="row">
@@ -340,20 +342,36 @@ class Search extends React.Component {
     )
   }
   SearchBar = () => {
+    const modifyfilter = () => {
+      this.setState({
+        showFilter: !this.state.showFilter,
+      })
+    }
     return (
-      <div className="mx-3 mx-xl-0">
-        <form onSubmit={this.handleSearch} className="search-input mx-0">
-          <input
-            /* ref={input => input && input.focus()} */
-            type="text"
-            value={this.state.search_key}
-            onChange={e => this.ChangeSearchKey(e.target.value)}
-            placeholder="Search"
-            autoComplete="off"
-          />
-          <button type="submit" />
-        </form>
-        <this.FilterTab />
+      <div className="mx-1 mx-xl-0">
+        <div className="row p-0 px-3">
+          <form
+            onSubmit={this.handleSearch}
+            className="search-input mx-0 col-10 col-sm-10 col-md-12"
+          >
+            <input
+              type="text"
+              value={this.state.search_key}
+              onChange={e => this.ChangeSearchKey(e.target.value)}
+              placeholder="Search"
+              autoComplete="off"
+            />
+            <button type="submit" />
+          </form>
+          <div className="col-1 d-md-none">
+            <button className="hide-mobile" onClick={modifyfilter} />
+          </div>
+        </div>
+        <div
+          className={"d-md-block " + (this.state.showFilter ? "" : "d-none")}
+        >
+          <this.FilterTab />
+        </div>
       </div>
     )
   }
