@@ -1,3 +1,13 @@
+/* removes outline everywhere */
+*:focus {
+  outline: none;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: inherit;
+  opacity: 1; /* Firefox */
+}
+
 .recommendations li {
   background: none;
   border: none;
@@ -144,10 +154,13 @@ input.search {
 
 .suggested {
   font-family: "Open Sans" !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   line-height: 1.43;
   letter-spacing: 0.3px !important;
+}
+.suggested-word {
+  font-weight: 400 !important;
 }
 .ds-default {
   box-shadow: 0px 15px 10px -15px rgba(0, 19, 77, 0.16);
@@ -255,7 +268,7 @@ nav.navbar-dark {
 }
 .search-input,
 .search-input-home {
-  margin: 0 2rem 0 2rem;
+  margin: 0;
   height: 76px;
   background-color: #f7f8f9;
   grid-template-columns: 90% 10%;
@@ -270,11 +283,21 @@ nav.navbar-dark {
   font-weight: 300;
   line-height: 1.44;
   letter-spacing: 0.3px;
-  color: #000d32;
+  color: #bec1ce;
   box-sizing: border-box;
   border: none;
   border-radius: 0;
   caret-color: #00ad57;
+}
+
+.search-input input:focus::placeholder,
+.search-input-home input:focus::placeholder {
+  color: #bec1ce;
+}
+
+.search-input input:focus,
+.search-input-home input:focus {
+  color: #000d32;
 }
 .search-input button,
 .search-input-home button {
@@ -282,6 +305,11 @@ nav.navbar-dark {
   border: none;
   background: url(../images/icons/search.svg) no-repeat center center;
   background-size: 50% 50%;
+  filter: contrast(1%) brightness(175%);
+}
+.search-input input:focus + button,
+.search-input-home input:focus + button {
+  filter: none;
 }
 header {
   min-height: 100vh;
@@ -311,7 +339,18 @@ header {
   color: #00ad57 !important;
 }
 
+@media (max-width: 992px) {
+  .search-input,
+  .search-input-home {
+    margin: 0 1rem 0 1rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .search-input,
+  .search-input-home {
+    margin: 0 2rem 0 2rem;
+  }
   .search-input {
     grid-template-columns: 80% 20%;
   }

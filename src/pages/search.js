@@ -414,7 +414,7 @@ class Search extends React.Component {
                 </span>
               </div>
             </div>
-            <div className="col-md-8 col-12 pl-md-5 pl-md-3">
+            <div className="col-md-8 col-12 pl-lg-3 pl-md-5">
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
