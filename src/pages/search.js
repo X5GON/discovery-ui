@@ -414,7 +414,7 @@ class Search extends React.Component {
                 </span>
               </div>
             </div>
-            <div className="col-md-8 col-12 pl-lg-3 pl-md-5">
+            <div className="col-md-9 col-12 pl-lg-3 pl-md-4">
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
@@ -422,7 +422,7 @@ class Search extends React.Component {
                 </h6>
               </a>
             </div>
-            <div className="col pl-0 d-none d-md-block pl-4 mt-2">
+            <div className="col-2 pl-0 d-none d-md-block mt-2">
               {sitem.license.typed_name
                 ? this.TinyIcons(sitem.license.typed_name)
                 : null}
@@ -441,7 +441,13 @@ class Search extends React.Component {
           </div>
           <div className="pt-3 info">
             <span className="d-block d-md-inline mb-1 mb-md-0">
-              <b>Provider:</b> {sitem.provider.name}
+              <b>Provider:</b>{" "}
+              <a
+                href={sitem.provider.domain}
+                className="text-black hover-green"
+              >
+                {sitem.provider.name}
+              </a>
             </span>
             <span className="text-green mx-3 d-none d-md-inline">/</span>
             <span className="d-block d-md-inline mb-1">
@@ -449,8 +455,17 @@ class Search extends React.Component {
             </span>
             <span className="text-green mx-3 d-none d-md-inline">/</span>
             <span className="d-block d-md-inline">
-              <b>Updated:</b>{" "}
-              {isoFormatDMY(parseISOString(sitem.retrieved_date))}
+              {sitem.creation_date ? (
+                <>
+                  <b>Created:</b>{" "}
+                  {isoFormatDMY(parseISOString(sitem.creation_date))}
+                </>
+              ) : (
+                <>
+                  <b>Updated:</b>{" "}
+                  {isoFormatDMY(parseISOString(sitem.retrieved_date))}
+                </>
+              )}
             </span>
           </div>
           <div className="col d-block d-md-none pt-4">
@@ -486,7 +501,7 @@ class Search extends React.Component {
         {this.state.loading ? <this.LoadingIcon /> : null}
         <div className="pb-5">
           <div className="maxer-880 mx-auto" id="search">
-            <this.Recommendations />
+            {/* <this.Recommendations /> */}
             <this.NrOfSearches />
             <this.SearchItemsUL />
             <this.BottomPagination />
