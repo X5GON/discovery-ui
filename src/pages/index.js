@@ -47,7 +47,7 @@ const IndexPage = () => {
       <header className="mb-0">
         <Navbar light={false} />
         <div className="text-center maxer-880 mx-auto pt-128 text-white">
-          <h2 className="mt-lg-5 mt-0 mb-lg-1 mb-0 pb-3 pb-lg-3 pt-4 pt-lg-0">
+          <h2 className="mt-0 mb-lg-1 mb-0 pb-3 pb-lg-3 pt-4 pt-lg-0">
             X5GON Discovery
           </h2>
           <h4 className="mx-4">

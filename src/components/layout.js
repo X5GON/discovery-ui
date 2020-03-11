@@ -19,7 +19,7 @@ export const Navbar = props => {
   const content = [
     {
       li: "Our Databases",
-      link: "/databases",
+      link: "/",
     },
     {
       li: "About",
@@ -34,7 +34,7 @@ export const Navbar = props => {
   return (
     <nav
       className={
-        "navbar pt-3 px-md-4 navbar-expand-sm navbar-" +
+        "navbar px-md-4 navbar-expand-sm navbar-" +
         (props.light ? "light" : "dark bg-sky")
       }
     >

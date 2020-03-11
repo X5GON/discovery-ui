@@ -7,6 +7,10 @@
   color: inherit;
   opacity: 1; /* Firefox */
 }
+.navbar {
+  padding-top: 0.75rem !important;
+  padding-bottom: 1rem !important;
+}
 
 .recommendations li {
   background: none;
@@ -33,7 +37,7 @@ input.search {
   width: 200px;
   height: 40px;
   border-radius: 4px;
-  background-color: #f7f8f9;
+  background-color: #f4f6f7 !important;
   background: url(../images/icons/down.svg) no-repeat center;
   background-position-x: 172px;
   background-size: 16px 16px;
@@ -58,12 +62,15 @@ input.search {
   background-color: #ffffff;
   height: 40px;
 }
+.filter.show .type-li {
+  background-color: #ffffff !important;
+}
 .filter .dropdown-menu {
   width: 200px;
   border: none;
   margin: 0;
   padding: 8px;
-  box-shadow: 0 3px 8px 0 rgba(0, 19, 77, 0.15);
+  box-shadow: 0 8px 8px 0 rgba(0, 19, 77, 0.15);
   border-radius: 0;
 }
 .filter .dropdown-menu button {
@@ -80,6 +87,9 @@ input.search {
 .filter .dropdown-menu button.active {
   background-color: #00ad57;
   color: #ffffff;
+}
+.filter .dropdown-item {
+  margin: 4px 0;
 }
 
 .license-nr {
@@ -103,14 +113,14 @@ input.search {
 .pagi-next,
 .pagi-previous {
   font-family: "Open Sans";
-  font-size: 16px;
   font-weight: 400;
   line-height: 1.43;
   letter-spacing: 0.3px;
   text-align: center;
-  font-size: 20px;
+  font-size: 14px;
   margin: 0 1rem 0 1rem;
   color: #bec1ce;
+  line-height: 32px;
 }
 .pagi-item-break {
   color: #bec1ce;
@@ -163,6 +173,10 @@ input.search {
 }
 .suggested-word {
   font-weight: 400 !important;
+}
+.suggested-word:hover {
+  text-decoration: underline;
+  color: white;
 }
 .ds-default {
   box-shadow: 0px 15px 10px -15px rgba(0, 19, 77, 0.16);
@@ -251,15 +265,15 @@ nav.navbar-dark {
 
 .search-img.video {
   background: url(../images/icons/video.svg) #f7f8f9 center no-repeat;
-  background-size: 38px 38px;
+  background-size: 32px 32px;
 }
 .search-img.text {
   background: url(../images/icons/text.svg) #f7f8f9 center no-repeat;
-  background-size: 38px 38px;
+  background-size: 32px 32px;
 }
 .search-img.audio {
   background: url(../images/icons/audio.svg) #f7f8f9 center no-repeat;
-  background-size: 38px 38px;
+  background-size: 32px 32px;
 }
 .tiny-icons img {
   margin-left: 10px;
@@ -284,8 +298,8 @@ nav.navbar-dark {
 .search-input,
 .search-input-home {
   margin: 0;
-  height: 76px;
-  background-color: #f7f8f9;
+  height: 90px;
+  background-color: #f4f6f7;
   grid-template-columns: 90% 10%;
   display: grid;
   border-radius: 4px;
@@ -311,15 +325,20 @@ nav.navbar-dark {
 }
 
 .search-input input:focus,
-.search-input-home input:focus {
-  color: #000d32;
+.search-input-home input:focus,
+.search-input.is-text input {
+  color: #000d32 !important;
 }
+.search-input.is-text button {
+  filter: none;
+}
+
 .search-input button,
 .search-input-home button {
   height: 100%;
   border: none;
   background: url(../images/icons/search.svg) no-repeat center center;
-  background-size: 50% 50%;
+  background-size: 40% 40%;
   filter: contrast(1%) brightness(175%);
 }
 .search-input input:focus + button,

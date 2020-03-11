@@ -132,8 +132,10 @@ class Search extends React.Component {
   BottomPagination = () => {
     if (this.state.api_search.metadata.total_pages) {
       return (
-        <div>
-          <p className="text-center text-ecosystem text-light-grey">PAGE</p>
+        <div className="mt-5">
+          <p className="text-center text-ecosystem text-light-grey mb-4">
+            PAGE
+          </p>
           <ReactPaginate
             pageCount={this.state.api_search.metadata.total_pages}
             pageRangeDisplayed={0}
@@ -143,7 +145,7 @@ class Search extends React.Component {
             pageClassName={"pagi-item"}
             pageLinkClassName={"pagi-item-link"}
             activeClassName={"pagi-item-link active"}
-            breakLabel={"..."}
+            breakLabel={"of"}
             breakClassName={"pagi-item"}
             breakLinkClassName={"pagi-item-break"}
             previousLabel={""}
@@ -215,6 +217,13 @@ class Search extends React.Component {
           },
           () => this.searchComponent()
         )
+      } else if (item === "") {
+        this.setState(
+          {
+            [statename]: [],
+          },
+          () => this.searchComponent()
+        )
       } else {
         this.setState(
           {
@@ -225,7 +234,7 @@ class Search extends React.Component {
       }
     }
     return (
-      <div className="col-sm-6 col-12 col-md-4">
+      <div className="col-sm-6 col-12 col-md-3">
         <div className={"filter mt-3 " + (props.style ? props.style : "")}>
           <div
             className="type-li"
@@ -255,6 +264,14 @@ class Search extends React.Component {
                 {props.displayTypes ? props.displayTypes[index] : item}
               </button>
             ))}
+            {this.state[statename].length !== 0 ? (
+              <button
+                className={"dropdown-item mt-2"}
+                onClick={() => ModifyItem("")}
+              >
+                Clear all ({this.state[statename].length})
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
@@ -275,7 +292,7 @@ class Search extends React.Component {
         )
       }
       return (
-        <div className="col-sm-6 col-12 col-md-4">
+        <div className="col-sm-6 col-12 col-md-3">
           <div className="filter mt-3">
             <div
               className="type-li"
@@ -284,7 +301,7 @@ class Search extends React.Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Type
+              {this.state.type !== "all" ? this.state.type : "Type"}
             </div>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {types.map(type => (
@@ -352,7 +369,10 @@ class Search extends React.Component {
         <div className="row p-0 px-3">
           <form
             onSubmit={this.handleSearch}
-            className="search-input mx-0 col-10 col-sm-10 col-md-12"
+            className={
+              "search-input mx-0 col-10 col-sm-10 col-md-12" +
+              (this.state.search_key ? " is-text" : "")
+            }
           >
             <input
               type="text"
@@ -418,7 +438,12 @@ class Search extends React.Component {
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
-                  <img src={link_img} height={36} alt="link" />
+                  <img
+                    style={{ marginLeft: "4px" }}
+                    src={link_img}
+                    height={36}
+                    alt="link"
+                  />
                 </h6>
               </a>
             </div>
@@ -439,7 +464,7 @@ class Search extends React.Component {
               <span className="d-md-none">{formurl}</span>
             </a>
           </div>
-          <div className="pt-3 info">
+          <div className="pt-4 info">
             <span className="d-block d-md-inline mb-1 mb-md-0">
               <b>Provider:</b>{" "}
               <a

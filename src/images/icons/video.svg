@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .ae96e21e-9772-4a29-b215-28cfa195cb05 {
+        fill: #4a5472;
+      }
+    </style>
+  </defs>
   <title>X5GON_Library_Icons</title>
-  <g id="e534a6e7-a3e4-4e24-983b-5a6500260455" data-name="Layer 3">
-    <path d="M26.5,10.8V9l-5,3.33V9H5.5V23h16V19.67l5,3.33V21.2h0V10.8ZM25,20.2l-3.5-2.33h0L20.2,17l-.2-.13V21.5H7v-11H20v4.64l.2-.14,1.3-.86h0l1.4-.93L25,11.8Z"/>
+  <g id="958ef634-cc26-443c-8d6f-842c804a58e3" data-name="Layer 3">
+    <path class="ae96e21e-9772-4a29-b215-28cfa195cb05" d="M26.5,10.8V9l-5,3.33V9H5.5V23h16V19.67l5,3.33V21.2h0V10.8ZM25,20.2l-3.5-2.33h0L20.2,17l-.2-.13V21.5H7v-11H20v4.64l.2-.14,1.3-.86h0l1.4-.93L25,11.8Z"/>
   </g>
 </svg>
