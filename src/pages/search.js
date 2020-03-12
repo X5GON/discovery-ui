@@ -8,7 +8,6 @@ import withLocation from "../components/withLocation"
 
 import { Layout, Navbar } from "../components/layout"
 
-import link_img from "../images/icons/link.svg"
 import copy from "../images/icons/copy.svg"
 import dve_crte from "../images/icons/dve_crte.svg"
 import no_cash from "../images/icons/no_cash.svg"
@@ -266,7 +265,7 @@ class Search extends React.Component {
             ))}
             {this.state[statename].length !== 0 ? (
               <button
-                className={"dropdown-item mt-2"}
+                className={"dropdown-item clear-all mt-2"}
                 onClick={() => ModifyItem("")}
               >
                 Clear all ({this.state[statename].length})
@@ -438,12 +437,7 @@ class Search extends React.Component {
               <a href={sitem.url} target="blank" className="d-inline-block">
                 <h6 className="searched maxer-500 pb-0 hover-green">
                   {sitem.title}
-                  <img
-                    style={{ marginLeft: "4px" }}
-                    src={link_img}
-                    height={36}
-                    alt="link"
-                  />
+                  <span className="link-img" />
                 </h6>
               </a>
             </div>
