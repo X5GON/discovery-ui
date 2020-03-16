@@ -88,7 +88,7 @@ const IndexPage = () => {
 
   const About = () => {
     return (
-      <div className="maxer-880 mx-auto p-64 text-purple px-5">
+      <div className="maxer-880 mx-auto p-64 text-purple px-5 d-none d-sm-block">
         <p className="search-description">
           The material search enables anyone to search through the indexed OER
           materials that are connected in our network via our Connect service.

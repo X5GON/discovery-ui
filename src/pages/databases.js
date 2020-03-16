@@ -2,7 +2,6 @@ import React from "react"
 
 import { Layout, Navbar } from "../components/layout"
 import list from "../images/icons/list.svg"
-import nantes from "../images/nantes.png"
 
 import CountUp from "react-countup"
 
@@ -24,12 +23,67 @@ const providers = [
   {
     name: "Videolectures.NET",
     link: "http://videolectures.net/",
-    number_materials: 1260,
+    number_materials: 27424,
   },
   {
     name: "UNIVERSITAT POLITÈCNICA DE VALÈNCIA",
     link: "https://media.upv.es",
-    number_materials: 1100,
+    number_materials: 4177,
+  },
+  {
+    name: "UOS",
+    link: "http://virtuos.uni-osnabrueck.de/",
+    number_materials: 507,
+  },
+  {
+    name: "Nantes University",
+    link: "http://madoc.univ-nantes.fr/",
+    number_materials: 34,
+  },
+  {
+    name: "MIT OpenCourseWare",
+    link: "https://ocw.mit.edu/",
+    number_materials: 46568,
+  },
+  {
+    name: "University of Bologna Digital Library",
+    link: "http://campus.unibo.it/",
+    number_materials: 10439,
+  },
+  {
+    name: "eUčbeniki",
+    link: "https://eucbeniki.sio.si/",
+    number_materials: 12539,
+  },
+  {
+    name: "OpenStax CNX",
+    link: "https://cnx.org/",
+    number_materials: 7925,
+  },
+  {
+    name: "OpenLearnWare",
+    link: "https://openlearnware.de/",
+    number_materials: 698,
+  },
+  {
+    name: "TIB AV-Portal",
+    link: "https://av.tib.eu/",
+    number_materials: 53,
+  },
+  {
+    name: "Engage NY",
+    link: "https://www.engageny.org/",
+    number_materials: 4619,
+  },
+  {
+    name: "The Siemens Stiftung Media Portal",
+    link: " https://medienportal.siemens-stiftung.org",
+    number_materials: 2130,
+  },
+  {
+    name: "eCampusOntario Open Librarz",
+    link: " https://openlibrary.ecampusontario.ca/",
+    number_materials: 86,
   },
 ]
 
