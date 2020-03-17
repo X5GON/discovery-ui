@@ -81,7 +81,7 @@ const providers = [
     number_materials: 2130,
   },
   {
-    name: "eCampusOntario Open Librarz",
+    name: "eCampusOntario Open Library",
     link: " https://openlibrary.ecampusontario.ca/",
     number_materials: 86,
   },
