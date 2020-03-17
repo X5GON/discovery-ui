@@ -88,7 +88,7 @@ const IndexPage = () => {
 
   const About = () => {
     return (
-      <div className="maxer-880 mx-auto p-64 text-purple px-5 d-none d-sm-block">
+      <div className="maxer-880 mx-auto p-64 text-purple px-5">
         <h4 className="mb-4">Why is this search different?</h4>
 
         <p className="search-description">
