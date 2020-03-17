@@ -89,33 +89,26 @@ const IndexPage = () => {
   const About = () => {
     return (
       <div className="maxer-880 mx-auto p-64 text-purple px-5 d-none d-sm-block">
+        <h4 className="mb-4">Why is this search different?</h4>
+
         <p className="search-description">
           The material search enables anyone to search through the indexed OER
-          materials that are connected in our network via our Connect service.
-          The material search functionality is cross-lingual and functions as a
-          Recommendation engine.
-        </p>
-        <h4 className="mb-4">Technical description</h4>
-        <p className="search-description pr-5">
-          The materials shown currently are text, video and audio. They are
-          enriched them through a process called Wikification and stored into a
-          database that contains data about user activities on the OER
-          repositories that integrated the Connect Service, a library developed
-          for acquiring behavior data.{" "}
+          materials that are connected in our network via our Connect service
+          and API. The material search functionality is cross-lingual and
+          functions as a Recommendation Engine.
         </p>
         <p className="search-description pr-5">
-          The platform consists of four major components – the database,
-          ingesting and processing pipeline, services and platform API – each
-          employed to perform a separate task. The platform is able to process
-          three types of OER materials: text, video and audio. In addition, it
-          enriches them through a process called Wikification. The processed
-          materials are stored into the database. The database also contains
-          data about user activities on the OER repositories that integrated the
-          X5GON Connect Service, a library developed for acquiring behaviour
-          data. The database is accessed by the different services developed
-          within the project – the recommender engine, the quality assurance
-          tool and the learning analytics tool – which can be accessed through
-          the platform API.
+          The materials shown currently are text, video and audio. We have
+          enriched through a process called Wikification and stored into a
+          database that contains data about user activities in the OER
+          repositories that integrated our Connect Service, a library developed
+          for acquiring behaviour data.
+        </p>
+        <p className="search-description pr-5">
+          The search consists of four major components – the database, ingesting
+          and processing pipeline, services and platform API – each employed to
+          perform a separate task for currenty types of OER materials, namely
+          text, video and audio.
         </p>
       </div>
     )
