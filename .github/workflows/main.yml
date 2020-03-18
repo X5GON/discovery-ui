@@ -12,15 +12,15 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   deploy:
-    runs-on: [linux]
+    runs-on: [ self-hosted,linux ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:  
-    - name: Build on production
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: cd ../../x5gon/x5gon-discovery && git pull && npm install && npm run-script build
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.PRIVATE_KEY }}
+    steps:
+      - name: Build on production
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -all
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
