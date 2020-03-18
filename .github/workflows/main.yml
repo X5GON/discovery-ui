@@ -23,4 +23,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: whoami
+          script: |
+            cd ../../x5gon/x5gon-discovery
+            git pull
+            npm install
+            npm run-script build
