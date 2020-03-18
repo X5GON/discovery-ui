@@ -19,11 +19,7 @@ jobs:
     - name: ls -a via ssh
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: |
-          cd ../../x5gon/x5gon-discovery
-          git pull
-          npm install
-          npm run-script build
+        command: cd ../../x5gon/x5gon-discovery && git pull && npm install && npm run-script build
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         passphrase: ${{ secrets.PASSPHRASE }}
