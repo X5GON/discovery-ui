@@ -16,7 +16,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:  
-    - name: ls -a via ssh
+    - name: Build on production
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: cd ../../x5gon/x5gon-discovery && git pull && npm install && npm run-script build
