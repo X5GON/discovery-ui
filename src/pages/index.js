@@ -69,7 +69,7 @@ const IndexPage = () => {
     ]
     /*eslint-disable */
     return (
-      <div className="pt-4 mt-5 mt-lg-0 mx-4">
+      <div className="pt-4 mt-5 mt-lg-0 mx-4 mb-5">
         <h6 className="suggested">
           <b>Suggested queries:</b>
           {reccs.map((word, index) => (
@@ -87,29 +87,45 @@ const IndexPage = () => {
   }
 
   const About = () => {
+    const para = [
+      "Search video, audio, text",
+      "Results are cross-lingual",
+      "Wikification of concepts",
+      "View as Recommendation Engine",
+      "Materials from connected OER sites",
+      "Enjoy and dig deep!",
+    ]
     return (
       <div className="maxer-880 mx-auto p-64 text-purple px-5">
         <h4 className="mb-4">Why is this search different?</h4>
-
-        <p className="search-description">
-          The material search enables anyone to search through the indexed OER
-          materials that are connected in our network via our Connect service
-          and API. The material search functionality is cross-lingual and
-          functions as a Recommendation Engine.
-        </p>
-        <p className="search-description pr-5">
-          The materials shown currently are text, video and audio. We have
-          enriched through a process called Wikification and stored into a
-          database that contains data about user activities in the OER
-          repositories that integrated our Connect Service, a library developed
-          for acquiring behaviour data.
-        </p>
-        <p className="search-description pr-5">
-          The search consists of four major components – the database, ingesting
-          and processing pipeline, services and platform API – each employed to
-          perform a separate task for currenty types of OER materials, namely
-          text, video and audio.
-        </p>
+        <div className="d-none d-md-block">
+          <p className="search-description">
+            The material search enables anyone to search through the indexed OER
+            sites that are connected in our network via our Connect service and
+            API, a library developed for acquiring behaviour data. The material
+            search functionality is cross-lingual and functions as a
+            Recommendation Engine.
+          </p>
+          <p className="search-description pr-5">
+            The materials shown currently are text, video and audio which we
+            have enriched through Wikification and stored into a database that
+            contains data about user activities in the OER sites that integrated
+            our Connect Service.
+          </p>
+          <p className="search-description pr-5">
+            This search consists of four major components – the database,
+            ingesting and processing pipeline, services and platform API – each
+            employed to perform a separate task for three types of OER
+            materials; text, video and audio.
+          </p>
+        </div>
+        <div className="d-block d-md-none">
+          <ul>
+            {para.map(par => (
+              <li className="search-description mb-2">{par}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
