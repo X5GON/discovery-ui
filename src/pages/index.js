@@ -4,7 +4,7 @@ import "../css/bootstrap.css"
 import "../css/search.css"
 import { navigate } from "gatsby"
 
-import { Layout, Navbar } from "../components/layout"
+import { Layout, Navbar, Footer } from "../components/layout"
 
 const IndexPage = () => {
   const goTo = searchKey => {
@@ -134,6 +134,7 @@ const IndexPage = () => {
     <Layout>
       <Header />
       <About />
+      <Footer />
     </Layout>
   )
 }

@@ -7,14 +7,18 @@ import logo_light from "../images/logo/x5gon_logo_light.svg"
 import "../css/search.css"
 
 export const Layout = props => {
+  return <div className={props.theme}>{props.children}</div>
+}
+
+export const Footer = () => {
   return (
-    <div className={props.theme}>
-      {props.children}
-      {/* <Footer /> */}
+    <div className="text-center pb-5">
+      <a href="https://platform.x5gon.org">
+        <p className="text-light-dark">Powered by X5GON</p>
+      </a>
     </div>
   )
 }
-
 export const Navbar = props => {
   const content = [
     {
@@ -35,23 +39,13 @@ export const Navbar = props => {
       }
     >
       <div className="navbar-brand">
-        {props.light ? (
-          <Link to="/" className="nav-link">
-            <img
-              src={props.light ? logo_light : logo_dark}
-              height="22px"
-              alt="logo"
-            ></img>
-          </Link>
-        ) : (
-          <a href="https://platform.x5gon.org" className="nav-link">
-            <img
-              src={props.light ? logo_light : logo_dark}
-              height="22px"
-              alt="logo"
-            ></img>
-          </a>
-        )}
+        <Link to="/" className="nav-link">
+          <img
+            src={props.light ? logo_light : logo_dark}
+            height="22px"
+            alt="logo"
+          ></img>
+        </Link>
       </div>
       <button
         className="navbar-toggler"
