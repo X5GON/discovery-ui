@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <style>
-      .fc067ff6-0eba-440b-8f0b-cd8aa17cd07f {
-        fill: #4a5472;
-      }
-    </style>
-  </defs>
-  <title>X5GON_Library_Icons</title>
-  <g id="94b3b138-ecd4-4eed-a80f-2886857bcbde" data-name="Layer 3">
-    <path class="fc067ff6-0eba-440b-8f0b-cd8aa17cd07f" d="M24,11.5,17.5,5H8V27H24V11.5ZM17.5,7.12l4.38,4.38H17.5Zm5,18.38H9.5V6.5H16V13h6.5ZM12,20.5h6V22H12Zm0-4h8V18H12Z"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.fc067ff6-0eba-440b-8f0b-cd8aa17cd07f{fill:#4a5472}</style></defs><title>X5GON_Library_Icons</title><g id="94b3b138-ecd4-4eed-a80f-2886857bcbde" data-name="Layer 3"><path d="M24,11.5,17.5,5H8V27H24V11.5ZM17.5,7.12l4.38,4.38H17.5Zm5,18.38H9.5V6.5H16V13h6.5ZM12,20.5h6V22H12Zm0-4h8V18H12Z" class="fc067ff6-0eba-440b-8f0b-cd8aa17cd07f"/></g></svg>
