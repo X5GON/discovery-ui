@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate"
 import { navigate } from "gatsby"
 import withLocation from "../components/withLocation"
 
-import { Layout, Navbar } from "../components/layout"
+import { Layout, Navbar, Footer } from "../components/layout"
 
 import copy from "../images/icons/copy.svg"
 import dve_crte from "../images/icons/dve_crte.svg"
@@ -46,7 +46,7 @@ class Search extends React.Component {
       showRecommendations: false,
       IsSearching: false,
       corsEnabled: false,
-      site_api: "https://platform.x5gon.org/api/v1/",
+      site_api: "https://platform.x5gon.org/api/v2/", //upgraded to v2
       wordlist: [],
       loading: true,
       showFilter: true,
@@ -232,6 +232,9 @@ class Search extends React.Component {
         )
       }
     }
+    if (props.disabled) {
+      return null
+    }
     return (
       <div className="col-sm-6 col-12 col-md-3">
         <div className={"filter mt-3 " + (props.style ? props.style : "")}>
@@ -278,7 +281,7 @@ class Search extends React.Component {
   }
   FilterTab = () => {
     const Type = () => {
-      const types = ["Video", "Audio", "Text"]
+      const types = ["Video", "Audio", "Text", "Image"]
       const ChangeType = type => {
         if (this.state.type === type) {
           type = "all"
@@ -349,13 +352,19 @@ class Search extends React.Component {
       ],
       style: "ml-md-auto",
     }
+
     return (
       <div className="row">
         <Type />
         <this.FilterMultiComponent props={licenses} />
-        <this.FilterMultiComponent props={languages} />
+        <this.FilterMultiComponent
+          props={{
+            ...languages,
+            disabled: this.state.type === "Image" ? true : false,
+          }}
+        />
       </div>
-    )
+    ) //,disabled:(this.state.type === 'Image' ?true :false)
   }
   SearchBar = () => {
     const modifyfilter = () => {
@@ -419,6 +428,86 @@ class Search extends React.Component {
     const formurl_lg =
       sitem.website.substr(0, 95) + (sitem.website.length > 95 ? "..." : "")
     const formurl = sitem.website.substr(0, 33) + " ..."
+
+    // if material is image, the response is completely different
+    if (sitem.image_id) {
+      return (
+        <li key={sitem.material_url} className="pb-3 mx-3 mx-lg-0">
+          <div className="search-li px-lg-5 px-4">
+            <div className="row p-0 mb-0">
+              <div className="col-md-1 col-12 pb-3">
+                <div className={"ml-md-3 ml-lg-0 search-img " + "image"}>
+                  <span
+                    className="d-md-none d-inline text-ecosystem text-light-grey pt-auto pl-5 ml-4"
+                    style={{ verticalAlign: "-50%" }}
+                  >
+                    {"IMAGE"}
+                  </span>
+                </div>
+              </div>
+              <div className="col-md-9 col-12 pl-lg-3 pl-md-4">
+                <a
+                  href={sitem.material_url}
+                  target="blank"
+                  className="d-inline-block"
+                >
+                  <h6 className="searched maxer-500 pb-0 hover-green">
+                    {sitem.title}
+                    <span className="link-img" />
+                  </h6>
+                </a>
+              </div>
+              <div className="col-2 pl-0 d-none d-md-block mt-2">
+                {sitem.license.typed_name
+                  ? this.TinyIcons(sitem.license.typed_name)
+                  : null}
+              </div>
+            </div>
+            {/*             {sitem.description ? (
+              <p className="search-description">{sitem.description}</p>
+            ) : null} */}
+
+            <div className="bg-light search-source">
+              Source:{" "}
+              <a className="text-muted hover-green" href={sitem.creator_url}>
+                <span className="d-md-inline d-none">{formurl_lg}</span>
+                <span className="d-md-none">{formurl}</span>
+              </a>
+            </div>
+            <div className="pt-4 info">
+              <span className="d-block d-md-inline mb-1 mb-md-0">
+                <b>Provider:</b>{" "}
+                <a href={sitem.website} className="text-black hover-green">
+                  {sitem.source}
+                </a>
+              </span>
+              <span className="text-green mx-3 d-none d-md-inline">/</span>
+              <span className="d-block d-md-inline mb-1 mb-md-0">
+                <b>Creator:</b>{" "}
+                <a href={sitem.creator_url} className="text-black hover-green">
+                  {sitem.creator}
+                </a>
+              </span>
+              <span className="text-green mx-3 d-none d-md-inline">/</span>
+              <span className="d-block d-md-inline mb-1 mb-md-0">
+                <b>CC metadata:</b>{" "}
+                <a
+                  href={sitem.cc_metadata_url}
+                  className="text-black hover-green"
+                >
+                  view
+                </a>
+              </span>
+            </div>
+            <div className="col d-block d-md-none pt-4">
+              {sitem.license.typed_name
+                ? this.TinyIcons(sitem.license.typed_name)
+                : null}
+            </div>
+          </div>
+        </li>
+      )
+    }
     return (
       <li key={sitem.url} className="pb-3 mx-3 mx-lg-0">
         <div className="search-li px-lg-5 px-4">

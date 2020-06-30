@@ -284,6 +284,10 @@ nav.navbar-dark {
   background: url(../images/icons/audio.svg) #f7f8f9 center no-repeat;
   background-size: 32px 32px;
 }
+.search-img.image {
+  background: url(../images/icons/image.svg) #f7f8f9 center no-repeat;
+  background-size: 32px 32px;
+}
 .tiny-icons img {
   margin-left: 10px;
 }
