@@ -50,6 +50,7 @@ class Search extends React.Component {
       wordlist: [],
       loading: true,
       showFilter: true,
+      search_error: false,
     }
   }
 
@@ -91,17 +92,27 @@ class Search extends React.Component {
         .then(res => res.json())
         .then(json => {
           console.log(json)
-          this.setState({
-            isLoaded: true,
-            api_search: {
-              query: json.query,
-              rec_materials: json.rec_materials,
-              metadata: json.metadata,
-            },
-            showRecommendations: false,
-            IsSearching: true,
-            loading: false,
-          })
+          if (json.status === "error") {
+            this.setState({
+              isLoaded: true,
+              IsSearching: true,
+              loading: false,
+              search_error: true,
+            })
+          } else {
+            this.setState({
+              isLoaded: true,
+              api_search: {
+                query: json.query,
+                rec_materials: json.rec_materials,
+                metadata: json.metadata,
+              },
+              showRecommendations: false,
+              IsSearching: true,
+              loading: false,
+              search_error: false,
+            })
+          }
         })
     }
   }
@@ -610,6 +621,11 @@ class Search extends React.Component {
         <div className="pb-5">
           <div className="maxer-880 mx-auto" id="search">
             {/* <this.Recommendations /> */}
+            {this.state.search_error ? (
+              <div class="alert alert-danger" role="alert">
+                Something went wrong
+              </div>
+            ) : null}
             <this.NrOfSearches />
             <this.SearchItemsUL />
             <this.BottomPagination />
