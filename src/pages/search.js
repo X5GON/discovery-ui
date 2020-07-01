@@ -2,6 +2,7 @@ import React from "react"
 import "../css/search.css"
 import "../css/bootstrap.css"
 import "../css/main.css"
+import "../css/images.css"
 import ReactPaginate from "react-paginate"
 import { navigate } from "gatsby"
 import withLocation from "../components/withLocation"
@@ -27,11 +28,12 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     // STATE
+    console.log(String(props.search.type))
 
     this.state = {
       defaultSearch: true,
       search_key: String(props.search.q),
-      type: "all",
+      type: props.search.type ? String(props.search.type) : "all", // "all" be default
       licenses: [],
       languages: [],
       current_page: 1,
@@ -126,8 +128,16 @@ class Search extends React.Component {
     this.setState({
       loading: true,
     })
-    e.preventDefault()
-    navigate("/search?q=" + this.state.search_key)
+    if (e) {
+      e.preventDefault()
+    }
+
+    console.log("amazing")
+    navigate(
+      "/search?q=" +
+        this.state.search_key +
+        (this.state.type !== "all" ? "&" + "type" + "=" + this.state.type : "")
+    )
     this.searchComponent()
   }
   AcceptRec = name => {
@@ -301,7 +311,7 @@ class Search extends React.Component {
           {
             type: type,
           },
-          () => this.searchComponent()
+          () => this.handleSearch()
         )
       }
       return (
@@ -443,64 +453,51 @@ class Search extends React.Component {
     // if material is image, the response is completely different
     if (sitem.image_id) {
       return (
-        <li key={sitem.material_url} className="pb-3 mx-3 mx-lg-0">
-          <div className="search-li px-lg-5 px-4">
-            <div className="row p-0 mb-0">
-              <div className="col-md-1 col-12 pb-3">
-                <div className={"ml-md-3 ml-lg-0 search-img " + "image"}>
-                  <span
-                    className="d-md-none d-inline text-ecosystem text-light-grey pt-auto pl-5 ml-4"
-                    style={{ verticalAlign: "-50%" }}
-                  >
-                    {"IMAGE"}
-                  </span>
-                </div>
-              </div>
-              <div className="col-md-9 col-12 pl-lg-3 pl-md-4">
-                <a
-                  href={sitem.material_url}
-                  target="blank"
-                  className="d-inline-block"
-                >
-                  <h6 className="searched maxer-500 pb-0 hover-green">
-                    {sitem.title}
-                    <span className="link-img" />
-                  </h6>
-                </a>
-              </div>
-              <div className="col-2 pl-0 d-none d-md-block mt-2">
-                {sitem.license.typed_name
-                  ? this.TinyIcons(sitem.license.typed_name)
-                  : null}
-              </div>
-            </div>
-            {/*             {sitem.description ? (
-              <p className="search-description">{sitem.description}</p>
-            ) : null} */}
-
-            <div className="bg-light search-source">
-              Source:{" "}
-              <a className="text-muted hover-green" href={sitem.creator_url}>
-                <span className="d-md-inline d-none">{formurl_lg}</span>
-                <span className="d-md-none">{formurl}</span>
+        <div
+          key={sitem.material_url}
+          className="col-lg-4 col-md-4 col-6 image mb-5"
+        >
+          <div className="mx-auto">
+            <div>
+              <a href={sitem.material_url} target="_blank">
+                <img
+                  src={sitem.material_url}
+                  alt={sitem.title}
+                  className="rounded cover"
+                  height="250px"
+                />
               </a>
             </div>
-            <div className="pt-4 info">
-              <span className="d-block d-md-inline mb-1 mb-md-0">
+
+            <div className="text-muted pt-2">{sitem.title}</div>
+
+            <span className="">
+              {sitem.license.typed_name.includes("sa") ? (
+                <img src={copy} alt="copy" />
+              ) : null}
+              {sitem.license.typed_name.includes("nd") ? (
+                <img src={dve_crte} alt="dve_crte" />
+              ) : null}
+              {sitem.license.typed_name.includes("nc") ? (
+                <img src={no_cash} alt="no_cash" />
+              ) : null}
+              <img src={cc} alt="cc" />
+            </span>
+            <div className="info">
+              <span className="d-block mb-1 mb-md-0">
                 <b>Provider:</b>{" "}
                 <a href={sitem.website} className="text-black hover-green">
                   {sitem.source}
                 </a>
               </span>
-              <span className="text-green mx-3 d-none d-md-inline">/</span>
-              <span className="d-block d-md-inline mb-1 mb-md-0">
+
+              <span className="d-block mb-1 mb-md-0">
                 <b>Creator:</b>{" "}
                 <a href={sitem.creator_url} className="text-black hover-green">
                   {sitem.creator}
                 </a>
               </span>
-              <span className="text-green mx-3 d-none d-md-inline">/</span>
-              <span className="d-block d-md-inline mb-1 mb-md-0">
+              <span className=" mb-1 mb-md-0">
                 <b>CC metadata:</b>{" "}
                 <a
                   href={sitem.cc_metadata_url}
@@ -510,13 +507,8 @@ class Search extends React.Component {
                 </a>
               </span>
             </div>
-            <div className="col d-block d-md-none pt-4">
-              {sitem.license.typed_name
-                ? this.TinyIcons(sitem.license.typed_name)
-                : null}
-            </div>
           </div>
-        </li>
+        </div>
       )
     }
     return (
@@ -596,18 +588,39 @@ class Search extends React.Component {
       </li>
     )
   }
-  SearchItemsUL = item => {
-    return (
+  SearchItemsUL = item =>
+    this.state.type === "Image" ? (
+      <div className="row images mx-auto">
+        {this.state.api_search.rec_materials.map(item => this.SearchItem(item))}
+      </div>
+    ) : (
       <ul className="searched-items mx-auto">
         {this.state.api_search.rec_materials.map(item => this.SearchItem(item))}
       </ul>
     )
-  }
+
   LoadingIcon = () => (
     <div className="d-relative">
       <div className="loading-icon mx-auto bg-none" />
     </div>
   )
+
+  ErrorBar = () =>
+    this.state.search_error ? (
+      <div class="alert alert-danger" role="alert">
+        Something went wrong
+      </div>
+    ) : null
+
+  CCDisclaimer = () =>
+    this.state.type === "Image" && this.state.isLoaded ? (
+      <p className="text-muted mx-3">
+        DISCLAIMER: The results are gathered via{" "}
+        <a className="hover-green" href="https://search.creativecommons.org">
+          Creative Commons API
+        </a>{" "}
+      </p>
+    ) : null
 
   // OTHER
 
@@ -621,13 +634,10 @@ class Search extends React.Component {
         <div className="pb-5">
           <div className="maxer-880 mx-auto" id="search">
             {/* <this.Recommendations /> */}
-            {this.state.search_error ? (
-              <div class="alert alert-danger" role="alert">
-                Something went wrong
-              </div>
-            ) : null}
+            <this.ErrorBar />
             <this.NrOfSearches />
             <this.SearchItemsUL />
+            <this.CCDisclaimer />
             <this.BottomPagination />
           </div>
         </div>
