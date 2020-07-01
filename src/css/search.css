@@ -366,6 +366,7 @@ header {
   line-height: 1.43;
   letter-spacing: 0.3px;
   color: #000d32;
+  padding: 2px 5px;
 }
 .info span {
   font-weight: 400;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 
 import { Layout, Navbar } from "../components/layout"
 import list from "../images/icons/list.svg"
+import loadingIcon from "../images/icons/Loading.svg"
 
 import CountUp from "react-countup"
 
@@ -553,13 +554,11 @@ const Repos = () => {
             <h4 className="pl-1 maxer-800">Connected providers</h4>
             {isLoading ? (
               <>
-                <div class="ml-3 d-flex align-items-center">
-                  Fetching live data
-                  <div
-                    class="spinner-border ml-3"
-                    role="status"
-                    aria-hidden="true"
-                  ></div>
+                <div className="mx-auto text-center align-items-center pt-3">
+                  <div className="mx-lg-1 px-4">
+                    <span style={{ fontSize: "20px" }}>Updating data </span>
+                    <img src={loadingIcon} alt="loading" height="65px" />
+                  </div>
                 </div>
               </>
             ) : null}

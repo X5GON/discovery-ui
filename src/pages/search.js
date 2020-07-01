@@ -217,6 +217,7 @@ class Search extends React.Component {
             {this.state.api_search.metadata.total_hits} Open Educational
             Resources Found
           </h4>
+          <this.CCDisclaimer />
         </div>
       )
     else {
@@ -458,31 +459,27 @@ class Search extends React.Component {
           className="col-lg-4 col-md-4 col-6 image mb-5"
         >
           <div className="mx-auto">
-            <div>
+            <div className="image-container">
               <a href={sitem.material_url} target="_blank">
-                <img
-                  src={sitem.material_url}
-                  alt={sitem.title}
-                  className="rounded cover"
-                  height="250px"
+                <div
+                  style={{ backgroundImage: `url(${sitem.material_url})` }}
+                  className="rounded img"
                 />
               </a>
+              <span className="cc-left">
+                {sitem.license.typed_name.includes("sa") ? (
+                  <img src={copy} alt="copy" />
+                ) : null}
+                {sitem.license.typed_name.includes("nd") ? (
+                  <img src={dve_crte} alt="dve_crte" />
+                ) : null}
+                {sitem.license.typed_name.includes("nc") ? (
+                  <img src={no_cash} alt="no_cash" />
+                ) : null}
+                <img src={cc} alt="cc" />
+              </span>
             </div>
 
-            <div className="text-muted pt-2">{sitem.title}</div>
-
-            <span className="">
-              {sitem.license.typed_name.includes("sa") ? (
-                <img src={copy} alt="copy" />
-              ) : null}
-              {sitem.license.typed_name.includes("nd") ? (
-                <img src={dve_crte} alt="dve_crte" />
-              ) : null}
-              {sitem.license.typed_name.includes("nc") ? (
-                <img src={no_cash} alt="no_cash" />
-              ) : null}
-              <img src={cc} alt="cc" />
-            </span>
             <div className="info">
               <span className="d-block mb-1 mb-md-0">
                 <b>Provider:</b>{" "}
@@ -614,7 +611,7 @@ class Search extends React.Component {
 
   CCDisclaimer = () =>
     this.state.type === "Image" && this.state.isLoaded ? (
-      <p className="text-muted mx-3">
+      <p className="text-muted mx-3 mt-3">
         DISCLAIMER: The results are gathered via{" "}
         <a className="hover-green" href="https://search.creativecommons.org">
           Creative Commons API
@@ -637,7 +634,6 @@ class Search extends React.Component {
             <this.ErrorBar />
             <this.NrOfSearches />
             <this.SearchItemsUL />
-            <this.CCDisclaimer />
             <this.BottomPagination />
           </div>
         </div>
