@@ -27,3 +27,8 @@
 .cc-left img {
   margin: auto 1px;
 }
+
+.image-card {
+  background: white;
+  border-radius: 0.25rem !important;
+}

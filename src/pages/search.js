@@ -458,7 +458,7 @@ class Search extends React.Component {
           key={sitem.material_url}
           className="col-lg-4 col-md-4 col-6 image mb-5"
         >
-          <div className="mx-auto">
+          <div className="mx-auto image-card">
             <div className="image-container">
               <a href={sitem.material_url} target="_blank">
                 <div
