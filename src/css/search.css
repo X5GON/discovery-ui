@@ -295,6 +295,9 @@ nav.navbar-dark {
   align-items: right;
   margin-left: 15px;
 }
+.cc-left:hover {
+  background-color: rgb(227, 227, 227);
+}
 
 .loading-icon {
   position: static;

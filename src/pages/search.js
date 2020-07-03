@@ -53,6 +53,7 @@ class Search extends React.Component {
       loading: true,
       showFilter: true,
       search_error: false,
+      confirmed_type: props.search.type ? String(props.search.type) : "all", // "all" be default
     }
   }
 
@@ -113,6 +114,7 @@ class Search extends React.Component {
               IsSearching: true,
               loading: false,
               search_error: false,
+              confirmed_type: this.state.type,
             })
           }
         })
@@ -348,7 +350,16 @@ class Search extends React.Component {
     const licenses = {
       text: "Licenses",
       statename: "licenses",
-      types: ["CC", "BY", "BY-NC", "BY-SA", "BY-ND", "BY-NC-ND", "BY-NC-SA"],
+      types: [
+        "CC",
+        "BY",
+        "BY-NC",
+        "BY-SA",
+        "BY-ND",
+        "BY-NC-ND",
+        "BY-NC-SA",
+        "PDM",
+      ],
       displayTypes: [
         "CC",
         "CC BY",
@@ -357,6 +368,7 @@ class Search extends React.Component {
         "CC BY-ND",
         "CC BY-NC-ND",
         "CC BY-NC-SA",
+        "PDM",
       ],
     }
     const languages = {
@@ -434,14 +446,24 @@ class Search extends React.Component {
       </div>
     )
   }
-  TinyIcons = lic_types => (
-    <span className="tiny-icons">
-      {lic_types.includes("sa") ? <img src={copy} alt="copy" /> : null}
-      {lic_types.includes("nd") ? <img src={dve_crte} alt="dve_crte" /> : null}
-      {lic_types.includes("nc") ? <img src={no_cash} alt="no_cash" /> : null}
-      <img src={cc} alt="cc" />
-    </span>
-  )
+  TinyIcons = (license, custom_class = "tiny-icons") => {
+    const lic_types = license.typed_name
+
+    return (
+      <a href={license.url} target="_blank">
+        <span className={custom_class}>
+          {lic_types.includes("sa") ? <img src={copy} alt="copy" /> : null}
+          {lic_types.includes("nd") ? (
+            <img src={dve_crte} alt="dve_crte" />
+          ) : null}
+          {lic_types.includes("nc") || lic_types.includes("pdm") ? (
+            <img src={no_cash} alt="no_cash" />
+          ) : null}
+          <img src={cc} alt="cc" />
+        </span>
+      </a>
+    )
+  }
   SearchItem = item => {
     let sitem = item
     if (sitem.description && sitem.description.length > 280) {
@@ -466,18 +488,7 @@ class Search extends React.Component {
                   className="rounded img"
                 />
               </a>
-              <span className="cc-left">
-                {sitem.license.typed_name.includes("sa") ? (
-                  <img src={copy} alt="copy" />
-                ) : null}
-                {sitem.license.typed_name.includes("nd") ? (
-                  <img src={dve_crte} alt="dve_crte" />
-                ) : null}
-                {sitem.license.typed_name.includes("nc") ? (
-                  <img src={no_cash} alt="no_cash" />
-                ) : null}
-                <img src={cc} alt="cc" />
-              </span>
+              {this.TinyIcons(sitem.license, "cc-left")}
             </div>
 
             <div className="info">
@@ -531,9 +542,7 @@ class Search extends React.Component {
               </a>
             </div>
             <div className="col-2 pl-0 d-none d-md-block mt-2">
-              {sitem.license.typed_name
-                ? this.TinyIcons(sitem.license.typed_name)
-                : null}
+              {sitem.license.typed_name ? this.TinyIcons(sitem.license) : null}
             </div>
           </div>
           {sitem.description ? (
@@ -577,16 +586,14 @@ class Search extends React.Component {
             </span>
           </div>
           <div className="col d-block d-md-none pt-4">
-            {sitem.license.typed_name
-              ? this.TinyIcons(sitem.license.typed_name)
-              : null}
+            {sitem.license.typed_name ? this.TinyIcons(sitem.license) : null}
           </div>
         </div>
       </li>
     )
   }
   SearchItemsUL = item =>
-    this.state.type === "Image" ? (
+    this.state.confirmed_type === "Image" ? (
       <div className="row images mx-auto">
         {this.state.api_search.rec_materials.map(item => this.SearchItem(item))}
       </div>
@@ -614,7 +621,7 @@ class Search extends React.Component {
       <p className="text-muted mx-3 mt-3">
         DISCLAIMER: The results are gathered via{" "}
         <a className="hover-green" href="https://search.creativecommons.org">
-          Creative Commons API
+          CC Search API
         </a>{" "}
       </p>
     ) : null
