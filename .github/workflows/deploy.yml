@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd ../../x5gon/x5gon-discovery
+            cd ./x5gon-discovery
             git pull
             npm install
             npm run-script build
