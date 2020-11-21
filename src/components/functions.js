@@ -1,6 +1,7 @@
 export function parseISOString(s) {
   var b = s.split(/\D+/)
-  return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]))
+  return new Date(Date.UTC(b[0], --b[1], b[2]))
+  //return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]))
 }
 
 const months = [
@@ -19,6 +20,7 @@ const months = [
 ]
 
 export function isoFormatDMY(d) {
+  console.log(d)
   return (
     d.getUTCDate() +
     " " +
@@ -27,3 +29,5 @@ export function isoFormatDMY(d) {
     d.getUTCFullYear()
   )
 }
+
+console.log(isoFormatDMY(parseISOString("2015-01-01")))
