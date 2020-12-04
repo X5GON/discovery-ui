@@ -26,5 +26,7 @@ jobs:
           script: |
             cd ./x5gon-discovery
             git pull
+            node --version
+            npm --version
             npm install
             npm run-script build
