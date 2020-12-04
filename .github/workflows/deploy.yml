@@ -26,6 +26,7 @@ jobs:
           script: |
             cd ./x5gon-discovery
             git pull
+            nvm use lts/dubnium
             node --version
             npm --version
             npm install
