@@ -26,6 +26,8 @@ jobs:
           script: |
             cd ./x5gon-discovery
             git pull
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh 
             nvm use lts/dubnium
             node --version
             npm --version
